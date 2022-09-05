@@ -2,6 +2,7 @@ package com.project.flowergarden
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -28,10 +29,12 @@ class MainActivityUser : AppCompatActivity() {
         user = FirebaseAuth.getInstance().currentUser
         UserDB = FirebaseDatabase.getInstance().getReference("User")
         userID = user!!.uid
-
+        Log.e("1","${user}")
+        Log.e("1","${userID}")
         UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                Log.e("2","${snapshot.value}")
                 val nickname = snapshot.child("nickname").value.toString()
                 binding.userNameTextView.text = "${nickname.toString()}님 환영합니다!"
                 //val nickname = snapshot.value
@@ -39,7 +42,6 @@ class MainActivityUser : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
     }

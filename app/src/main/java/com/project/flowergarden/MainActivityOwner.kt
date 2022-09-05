@@ -32,7 +32,7 @@ class MainActivityOwner : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val nickname = snapshot.child("storename").value.toString()
-                binding.nickNameTextView.text = "${nickname.toString()}"
+                binding.nickNameTextView.text = "${nickname}"
                 //val nickname = snapshot.value
                 //binding.nickNameTextView.text = "${nickname.toString()}"
             }

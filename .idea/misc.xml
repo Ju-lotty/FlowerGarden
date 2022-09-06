@@ -9,6 +9,7 @@
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/drawable/ic_map.xml" value="0.194" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/drawable/ic_search.xml" value="0.194" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/drawable/owenr_img_shape.xml" value="0.193" />
+        <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/drawable/owner_img_shape.xml" value="0.115" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/drawable/shape_login.xml" value="0.1235" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/activity_join_ower.xml" value="0.1125" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/activity_join_owner.xml" value="0.2" />
@@ -19,13 +20,12 @@
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/activity_main_owner.xml" value="0.16259057971014493" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/activity_main_user.xml" value="0.1859375" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/activity_start.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/fragment_information.xml" value="0.171875" />
+        <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/fragment_like.xml" value="0.16259057971014493" />
+        <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/layout/fragment_near_location.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/menu/main_ower_bottom.xml" value="0.1859375" />
         <entry key="..\:/Users/J/Desktop/FlowerGarden/app/src/main/res/menu/main_user_bottom.xml" value="0.1859375" />
-        <entry key="app/src/main/res/layout/activity_join_user.xml" value="0.321875" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.321875" />
-        <entry key="app/src/main/res/layout/activity_main_user.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/item_store.xml" value="0.32083333333333336" />
-        <entry key="app/src/main/res/menu/main_ower_bottom.xml" value="0.15885416666666666" />
       </map>
     </option>
   </component>

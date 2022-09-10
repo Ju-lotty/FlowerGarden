@@ -74,14 +74,13 @@ class Home : Fragment() {
                 adapter.storeList.add(OwnerEntity(snapshot.value.toString(), "", ""))
                 adapter.notifyDataSetChanged()
                 Log.e("User", "")
-
             }
 
             override fun onCancelled(error: DatabaseError) {
-
             }
 
         })
+        //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
         UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {

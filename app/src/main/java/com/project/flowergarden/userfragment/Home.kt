@@ -2,15 +2,14 @@ package com.project.flowergarden.userfragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.project.flowergarden.R
 import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
@@ -71,9 +70,16 @@ class Home : Fragment() {
 
         OwnerDB.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                adapter.storeList.add(OwnerEntity(snapshot.value.toString(), "", ""))
+                if(snapshot.exists()) {
+                    for(OwnerSnapshot in snapshot.children) {
+                        adapter.storeList.add(OwnerEntity(snapshot.value.toString(), "", ""))
+                        adapter.notifyDataSetChanged()
+                        Log.e("User", "")
+                    }
+                }
+                /*dapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
                 adapter.notifyDataSetChanged()
-                Log.e("User", "")
+                Log.e("User", "")*/
             }
 
             override fun onCancelled(error: DatabaseError) {

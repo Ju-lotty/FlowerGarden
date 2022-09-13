@@ -1,5 +1,6 @@
 package com.project.flowergarden.userfragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,20 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.project.flowergarden.StartActivity
+import com.project.flowergarden.StoreDetailActivity
 import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Home.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Home : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -37,22 +30,11 @@ class Home : Fragment() {
     private lateinit var OwnerDB: DatabaseReference
     private var userID: String? = null
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -70,14 +52,12 @@ class Home : Fragment() {
 
         OwnerDB.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()) {
-                    for(OwnerSnapshot in snapshot.children) {
-                        adapter.storeList.add(OwnerEntity(snapshot.value.toString(), "", ""))
-                        adapter.notifyDataSetChanged()
-                        Log.e("User", "")
-                    }
+                adapter.setData(OwnerEntity(snapshot.value.toString(),"","")) {
+                    val intent = Intent(context, StoreDetailActivity::class.java)
+                    intent.putExtra("owner", "${it}")
+                    StartActivity()
                 }
-                /*dapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
+                /*adapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
                 adapter.notifyDataSetChanged()
                 Log.e("User", "")*/
             }

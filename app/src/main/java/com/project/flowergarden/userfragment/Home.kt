@@ -40,47 +40,56 @@ class Home : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewFlipper()
-        binding.storeList.layoutManager = LinearLayoutManager(activity)
-        binding.storeList.adapter = adapter
-        auth = FirebaseAuth.getInstance()
 
-        user = FirebaseAuth.getInstance().currentUser
-        OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
-        UserDB = FirebaseDatabase.getInstance().getReference("User")
-        userID = user!!.uid
-
-        OwnerDB.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                adapter.setData(OwnerEntity(snapshot.value.toString(),"","")) {
-                    val intent = Intent(context, StoreDetailActivity::class.java)
-                    intent.putExtra("owner", "${it}")
-                    StartActivity()
-                }
-                /*adapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
-                adapter.notifyDataSetChanged()
-                Log.e("User", "")*/
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
-        //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
-        UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                Log.e("2", "${snapshot.value}")
-                val nickname = snapshot.child("nickname").value.toString()
-                binding.userNameTextView.text = "${nickname.toString()}님 환영합니다!"
-                //val nickname = snapshot.value
-                //binding.userNameTextView.text = "${nickname.toString()}"
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
     }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+            viewFlipper()
+            binding.storeList.layoutManager = LinearLayoutManager(activity)
+            binding.storeList.adapter = adapter
+            auth = FirebaseAuth.getInstance()
+
+            user = FirebaseAuth.getInstance().currentUser
+            OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
+            UserDB = FirebaseDatabase.getInstance().getReference("User")
+            userID = user!!.uid
+
+            OwnerDB.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    adapter.setData(OwnerEntity(snapshot.value.toString(),"","")) {
+                        activity?.let {
+                            val intent = Intent(context, StoreDetailActivity::class.java)
+                            intent.putExtra("owner","{$it}")
+                            activity!!.startActivity(intent)
+                        }
+                    }
+                    /*adapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
+                    adapter.notifyDataSetChanged()
+                    Log.e("User", "")*/
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+            //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
+            UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    Log.e("2", "${snapshot.value}")
+                    val nickname = snapshot.child("nickname").value.toString()
+                    binding.userNameTextView.text = "${nickname.toString()}님 환영합니다!"
+                    //val nickname = snapshot.value
+                    //binding.userNameTextView.text = "${nickname.toString()}"
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+        }
+
 
     private fun viewFlipper() = with(binding) {
         viewFlipper.startFlipping()

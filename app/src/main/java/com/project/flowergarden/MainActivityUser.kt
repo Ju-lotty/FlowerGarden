@@ -1,8 +1,10 @@
 package com.project.flowergarden
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -40,7 +42,12 @@ class MainActivityUser : AppCompatActivity() {
         userID = user!!.uid
         OwnerDB.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                adapter.storeList.add(OwnerEntity(snapshot.value.toString(),"",""))
+                adapter.setData(OwnerEntity(snapshot.value.toString(),"","")){
+                    Toast.makeText(this@MainActivityUser,"${it}",Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MainActivityUser,StoreDetailActivity::class.java)
+                    intent.putExtra("owner","${it}")
+                    startActivity(intent)
+                }
                 adapter.notifyDataSetChanged()
                 Log.e("User", "")
 

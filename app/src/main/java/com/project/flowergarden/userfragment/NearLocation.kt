@@ -45,9 +45,16 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_near_location, container, false)
+        val rootView = inflater.inflate(
+            R.layout.fragment_near_location,
+            container, false
+        ) as ViewGroup
+        mapView = rootView.findViewById<View>(R.id.map_view) as MapView
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

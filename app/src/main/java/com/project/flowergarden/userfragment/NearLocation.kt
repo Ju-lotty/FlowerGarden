@@ -14,15 +14,21 @@ import com.project.flowergarden.R
 
 class NearLocation : Fragment(), OnMapReadyCallback {
 
+
+    //xml mapView 연결
     private lateinit var mapView: MapView
+
+    //사용자 위치와 naverMap OnMapReadyCallback 메소드
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //현재 위치 표시
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
 
+    //권한처리
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
                                             grantResults: IntArray) {
@@ -47,14 +53,22 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         mapView = view.findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
 
+
+        //uiSettings 인스턴스 가져오기
         val uiSettings = naverMap.uiSettings
+
+        //나침반을 비활성화하고 현위치 버튼을 활성화
         uiSettings.isCompassEnabled = false
         uiSettings.isLocationButtonEnabled = true
 
     }
 
+
+    //뷰 시작시 위치 이동
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
+        //카메라의 움직임에 따라 나선형 모양 움직임
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
         naverMap.locationSource = locationSource
     }
 

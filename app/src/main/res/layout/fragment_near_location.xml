@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment
-    android:id="@+id/map_fragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="com.naver.maps.map.MapFragment"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
 
-<!--    //android:name="com.naver.maps.map.MapFragment"/>-->
+<com.naver.maps.map.MapView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/map_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 

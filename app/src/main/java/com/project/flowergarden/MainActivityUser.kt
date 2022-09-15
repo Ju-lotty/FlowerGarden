@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
-import com.google.firebase.database.*
 import com.project.flowergarden.databinding.ActivityMainUserBinding
 import com.project.flowergarden.userfragment.Home
 import com.project.flowergarden.userfragment.Information

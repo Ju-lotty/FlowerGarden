@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.project.flowergarden.databinding.ActivityJoinOwnerBinding
 import com.project.flowergarden.entity.OwnerEntity
 
+
 class JoinOwner : AppCompatActivity() {
 
     private lateinit var binding: ActivityJoinOwnerBinding

@@ -12,6 +12,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
 
+@Suppress("DEPRECATION")
 class NearLocation : Fragment(), OnMapReadyCallback {
 
 
@@ -29,6 +30,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     }
 
     //권한처리
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
                                             grantResults: IntArray) {
@@ -67,7 +69,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     //뷰 시작시 위치 이동
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
-        //카메라의 움직임에 따라 나선형 모양 움직임
+        //사용자 움직임에 따라 카메라(나선형) 움직임 설정
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
         naverMap.locationSource = locationSource
     }

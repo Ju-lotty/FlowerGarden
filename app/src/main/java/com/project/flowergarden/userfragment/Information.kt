@@ -1,60 +1,100 @@
 package com.project.flowergarden.userfragment
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.project.flowergarden.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
+import com.project.flowergarden.StartActivity
+import com.project.flowergarden.databinding.FragmentInformationBinding
+import kotlinx.android.synthetic.main.fragment_information.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Information.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Information : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentInformationBinding
+
+    //유저 정보 불러오기 (아이디, 닉네임 등)
+    private var user: FirebaseUser? = null
+    private lateinit var UserDB: DatabaseReference //실시간 데이터베이스
+    private var userID: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_information, container, false)
+    ): View {
+        binding = FragmentInformationBinding.inflate(layoutInflater)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Information.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Information().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        logoutButtonClicked()
+        secessionButtonClicked()
+        showUserNickname()
     }
+
+    private fun showUserNickname() {
+        user = FirebaseAuth.getInstance().currentUser
+        UserDB = FirebaseDatabase.getInstance().getReference("User")
+        userID = user!!.uid
+
+        UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val nickname = snapshot.child("nickname").value.toString()
+                binding.userNameTextView.text = "${nickname.toString()}님"
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun likeButtonClicked() {
+        TODO("Not yet implemented")
+    }
+    private fun logoutButtonClicked() {
+        logoutButton.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle("로그아웃") //제목
+                .setMessage("로그아웃을 하시겠습니까?") // 메시지
+                .setPositiveButton("확인") { _, _ ->
+                    FirebaseAuth.getInstance().signOut()
+                    activity?.let {
+                        val intent = Intent(context, StartActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+                .setNegativeButton("취소") { _, _ -> }
+                .create()
+                .show()
+        }
+    }
+    private fun secessionButtonClicked() {
+        secessionButton.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle("회원탈퇴") //제목
+                .setMessage("회원탈퇴를 하시겠습니까? \n탈퇴한 계정은 복구가 불가합니다.") // 메시지
+                .setPositiveButton("확인") { _, _ ->
+                    FirebaseAuth.getInstance().currentUser?.delete()
+                    activity?.let {
+                        val intent = Intent(context, StartActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+                .setNegativeButton("취소") { _, _ -> }
+                .create()
+                .show()
+        }
+    }
+
 }

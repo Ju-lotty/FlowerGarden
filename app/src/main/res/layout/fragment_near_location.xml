@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.naver.maps.map.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
-    android:id="@+id/map_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:navermap_locationButtonEnabled="true"
-    app:ignore="NamespaceTypo">
+    android:layout_height="match_parent">
+
+    <!--MapFragment = Activity-->
+    <!--MapView = Fragment-->
+
+    <com.naver.maps.map.MapView xmlns:app="http://schemas.android.com/tools"
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ignore="NamespaceTypo"
+        app:navermap_locationButtonEnabled="true" />
+
+    <com.naver.maps.map.widget.LocationButtonView
+        android:id="@+id/navermap_location_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="12dp"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent" />
 
 
-</com.naver.maps.map.MapView>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

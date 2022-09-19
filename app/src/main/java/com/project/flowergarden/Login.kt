@@ -17,7 +17,6 @@ class Login : AppCompatActivity() {
     private var auth: FirebaseAuth? = null //파이어베이스 인증
 
     private lateinit var OwnerDB : DatabaseReference //실시간 데이터베이스
-    private lateinit var UserDB : DatabaseReference //실시간 데이터베이스
     private var userID: String? = null
     private var user: FirebaseUser? = null
 

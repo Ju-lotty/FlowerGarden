@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.project.flowergarden.StartActivity
 import com.project.flowergarden.StoreDetailActivity
 import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
@@ -40,56 +39,50 @@ class Home : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewFlipper()
+        binding.storeList.layoutManager = LinearLayoutManager(activity)
+        binding.storeList.adapter = adapter
+        auth = FirebaseAuth.getInstance()
 
-    }
+        user = FirebaseAuth.getInstance().currentUser
+        OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
+        UserDB = FirebaseDatabase.getInstance().getReference("User")
+        userID = user!!.uid
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-            viewFlipper()
-            binding.storeList.layoutManager = LinearLayoutManager(activity)
-            binding.storeList.adapter = adapter
-            auth = FirebaseAuth.getInstance()
-
-            user = FirebaseAuth.getInstance().currentUser
-            OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
-            UserDB = FirebaseDatabase.getInstance().getReference("User")
-            userID = user!!.uid
-
-            OwnerDB.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    adapter.setData(OwnerEntity(snapshot.value.toString(),"","")) {
-                        activity?.let {
-                            val intent = Intent(context, StoreDetailActivity::class.java)
-                            intent.putExtra("owner","{$it}")
-                            activity!!.startActivity(intent)
-                        }
+        OwnerDB.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                adapter.setData(OwnerEntity(snapshot.value.toString(),"","")) {
+                    activity?.let {
+                        val intent = Intent(context, StoreDetailActivity::class.java)
+                        intent.putExtra("owner","{$it}")
+                        activity!!.startActivity(intent)
                     }
-                    /*adapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
-                    adapter.notifyDataSetChanged()
-                    Log.e("User", "")*/
                 }
+                /*adapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
+                adapter.notifyDataSetChanged()
+                Log.e("User", "")*/
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                }
+            override fun onCancelled(error: DatabaseError) {
+            }
 
-            })
-            //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
-            UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
+        })
+        //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
+        UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    Log.e("2", "${snapshot.value}")
-                    val nickname = snapshot.child("nickname").value.toString()
-                    binding.userNameTextView.text = "${nickname.toString()}님 환영합니다!"
-                    //val nickname = snapshot.value
-                    //binding.userNameTextView.text = "${nickname.toString()}"
-                }
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Log.e("2", "${snapshot.value}")
+                val nickname = snapshot.child("nickname").value.toString()
+                binding.userNameTextView.text = "${nickname.toString()}님 환영합니다!"
+                //val nickname = snapshot.value
+                //binding.userNameTextView.text = "${nickname.toString()}"
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })
-        }
-
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
 
     private fun viewFlipper() = with(binding) {
         viewFlipper.startFlipping()

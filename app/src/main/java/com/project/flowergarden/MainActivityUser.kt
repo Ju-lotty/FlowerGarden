@@ -37,7 +37,6 @@ class MainActivityUser : AppCompatActivity() {
         }
     }
 
-
     private fun showFragment(fragment: Fragment): Boolean{
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.container,fragment)
@@ -45,5 +44,4 @@ class MainActivityUser : AppCompatActivity() {
         }
         return true
     }
-
 }

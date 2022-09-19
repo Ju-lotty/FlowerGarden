@@ -1,41 +1,66 @@
 package com.project.flowergarden.userfragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.MapView
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import androidx.fragment.app.Fragment
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
 
-@Suppress("DEPRECATION")
+
 class NearLocation : Fragment(), OnMapReadyCallback {
 
-
-    //xml mapView 연결
-    private lateinit var mapView: MapView
-
-    //사용자 위치와 naverMap OnMapReadyCallback 메소드
-    private lateinit var naverMap: NaverMap
+    //FusedLocationSource 뷰의 객체를 전달하고 권한 요청 코드 지정
     private lateinit var locationSource: FusedLocationSource
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //현재 위치 표시
-        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+    //mapView를 받아오기 위해 변수 설정
+    private lateinit var mapView: MapView
+
+    private lateinit var naverMap: NaverMap
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_near_location, container, false)
     }
 
-    //권한처리
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>,
-                                            grantResults: IntArray) {
-        if (locationSource.onRequestPermissionsResult(requestCode, permissions,
-                grantResults)) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+        mapView = view.findViewById(R.id.map_view)
+        mapView.onCreate(savedInstanceState)
+
+        //getMapAsync 메서드를 호출하여 프래그먼트에서 콜백을 설정
+        mapView.getMapAsync(this)
+    }
+
+    //뷰 시작시 위치 이동
+   override fun onMapReady(naverMap: NaverMap) {
+
+        //NaverMap으로부터 UiSettings 인스턴스를 가져오기 (위치, 나침반, 실내지도 층 피커, 줌버튼)
+        val uiSettings = naverMap.uiSettings
+
+        //초기 위치 설정, 위경도
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.562238,127.065175)).animate(CameraAnimation.Easing, 1000)
+        naverMap.moveCamera(cameraUpdate)
+
+        //현위치 버튼 활성화
+        uiSettings.isLocationButtonEnabled = true
+
+        //현위치 추적, 나선형 꼴 모양
+        naverMap.locationSource = locationSource
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+    }
+
+    //권한 요청
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated) { // 권한 거부됨
                 naverMap.locationTrackingMode = LocationTrackingMode.None
             }
@@ -44,43 +69,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        // Inflate the layout for this fragment
-        val rootView = inflater.inflate(
-            R.layout.fragment_near_location,
-            container, false
-        ) as ViewGroup
-        mapView = rootView.findViewById<View>(R.id.map_view) as MapView
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync(this)
-        return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mapView = view.findViewById(R.id.map_view)
-        mapView.onCreate(savedInstanceState)
-
-
-        //uiSettings 인스턴스 가져오기
-        val uiSettings = naverMap.uiSettings
-
-        //나침반을 비활성화하고 현위치 버튼을 활성화
-        uiSettings.isCompassEnabled = false
-        uiSettings.isLocationButtonEnabled = true
-
-    }
-
-
-    //뷰 시작시 위치 이동
-    override fun onMapReady(naverMap: NaverMap) {
-        this.naverMap = naverMap
-        //사용자 움직임에 따라 카메라(나선형) 움직임 설정
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
-        naverMap.locationSource = locationSource
-    }
-
+    //아래 생명주기
     override fun onStart() {
         super.onStart()
         mapView.onStart()
@@ -117,8 +106,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     }
 
 
-
     companion object {
-            private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 }

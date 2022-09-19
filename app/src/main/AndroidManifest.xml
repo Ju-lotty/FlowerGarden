@@ -50,7 +50,7 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="r6ybv8etcx" />
+            android:value="r6ybv8etcx"/>
     </application>
 
 </manifest>

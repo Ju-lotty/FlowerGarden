@@ -3,18 +3,21 @@ package com.project.flowergarden.userfragment
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.project.flowergarden.MainActivityUser
+import com.project.flowergarden.R
 import com.project.flowergarden.StartActivity
 import com.project.flowergarden.databinding.FragmentInformationBinding
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_information.*
-
+import kotlinx.android.synthetic.main.fragment_like.*
 
 class Information : Fragment() {
 
@@ -36,10 +39,15 @@ class Information : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
         logoutButtonClicked()
         secessionButtonClicked()
         showUserNickname()
     }
+
+
 
     private fun showUserNickname() {
         user = FirebaseAuth.getInstance().currentUser
@@ -57,9 +65,6 @@ class Information : Fragment() {
         })
     }
 
-    private fun likeButtonClicked() {
-        TODO("Not yet implemented")
-    }
     private fun logoutButtonClicked() {
         logoutButton.setOnClickListener {
             val builder = AlertDialog.Builder(context)

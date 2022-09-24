@@ -52,7 +52,7 @@ class Home : Fragment() {
 
         OwnerDB.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                adapter.setData(OwnerEntity(snapshot.value.toString(),"","")) {
+                adapter.setData(OwnerEntity(snapshot.value.toString(),"","","")) {
                     activity?.let {
                         val intent = Intent(context, StoreDetailActivity::class.java)
                         intent.putExtra("owner","{$it}")

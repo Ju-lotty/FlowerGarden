@@ -10,7 +10,7 @@ import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
 
-
+//OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있으며  객체(NaverMap)가 준비되면 onMapReady() 콜백 메서드가 호출
 class NearLocation : Fragment(), OnMapReadyCallback {
 
     //FusedLocationSource 뷰의 객체를 전달하고 권한 요청 코드 지정
@@ -31,11 +31,13 @@ class NearLocation : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //FusedLocationSource : 런타임 권한 처리를 위해 Activity 또는 Fragment 필요로 하며 권한요청 코드 지정
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         mapView = view.findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
 
-        //getMapAsync 메서드를 호출하여 프래그먼트에서 콜백을 설정
+        //getMapAsync 메서드를 호출하여 프래그먼트에서 콜백을 설정, 비동기로 NaverMap 객체를 얻을 수 있습니다.
         mapView.getMapAsync(this)
     }
 
@@ -58,7 +60,8 @@ class NearLocation : Fragment(), OnMapReadyCallback {
 
     }
 
-    //권한 요청
+    //권한 요청 이후 유저가 권한을 허용 했을 시
+    // onRequestPermissionResult()의 결과를 FusedLocationSource의 onRequestPermissionsResult()에 전달
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated) { // 권한 거부됨
@@ -105,7 +108,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         mapView.onLowMemory()
     }
 
-
+    //컴파일 시간에 결정되는 상수(값이 변하지 않음)
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }

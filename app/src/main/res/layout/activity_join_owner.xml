@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JoinOwner"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".JoinOwner">
 
     <TextView
         android:id="@+id/joinTextView"
@@ -42,8 +42,8 @@
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/font"
         android:hint="아이디를 입력해주세요"
-        android:textColor="@color/white"
         android:inputType="textEmailAddress"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/value_Id"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +97,6 @@
 
 
     <EditText
-        android:textColor="@color/white"
         android:id="@+id/storenameEditTextView"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -105,22 +104,68 @@
         android:fontFamily="@font/font"
         android:hint="점포명을 입력해주세요"
         android:inputType="text"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/value_Nickname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/value_Address"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="130dp"
+        android:fontFamily="@font/font"
+        android:text="주소"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/value_Nickname" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:textSize="18sp"
+        android:id="@+id/addressButton"
+        android:background="#00ff0000"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/font"
+        android:hint="주소입력을 해주세요."
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/value_Address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:fontFamily="@font/font"
+        android:layout_marginStart="150dp"
+        android:textColor="@color/white"
+        tools:text = "서울특별시 동대문구 답십리로23길 33"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressButton"
+        android:layout_marginBottom="100dp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/joinOwnerButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/shape_login"
         android:text="회원가입"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/value_Nickname" />
+        app:layout_constraintTop_toBottomOf="@id/address" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

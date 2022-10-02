@@ -148,10 +148,38 @@
         android:fontFamily="@font/font"
         android:layout_marginStart="150dp"
         android:textColor="@color/white"
-        tools:text = "서울특별시 동대문구 답십리로23길 33"
+        tools:text = "서울특별시 종로구"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addressButton"
+        android:layout_marginBottom="100dp"/>
+
+    <TextView
+        android:id="@+id/x"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:fontFamily="@font/font"
+        android:layout_marginStart="150dp"
+        android:textColor="@color/white"
+        tools:text = "32.1231"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        android:layout_marginBottom="100dp"/>
+
+    <TextView
+        android:id="@+id/y"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:fontFamily="@font/font"
+        android:layout_marginStart="150dp"
+        android:textColor="@color/white"
+        tools:text = "123.00123"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/x"
         android:layout_marginBottom="100dp"/>
 
     <androidx.appcompat.widget.AppCompatButton

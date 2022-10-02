@@ -1,14 +1,20 @@
 package com.project.flowergarden.userfragment
 
+import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
+import java.util.*
 
 //OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있으며  객체(NaverMap)가 준비되면 onMapReady() 콜백 메서드가 호출
 class NearLocation : Fragment(), OnMapReadyCallback {
@@ -20,6 +26,38 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     private lateinit var mapView: MapView
 
     private lateinit var naverMap: NaverMap
+
+    private var auth: FirebaseAuth? = null //파이어베이스 인증
+    //유저 정보 불러오기 (아이디, 닉네임 등)
+    private var user: FirebaseUser? = null
+    private lateinit var OwnerDB: DatabaseReference //실시간 데이터베이스
+    private var userID: String? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+        user = FirebaseAuth.getInstance().currentUser
+        OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
+        userID = user!!.uid
+
+
+
+
+        OwnerDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val address = snapshot.child("address").value.toString()
+
+
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +109,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
 
     //아래 생명주기
     override fun onStart() {

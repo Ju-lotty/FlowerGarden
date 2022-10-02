@@ -64,7 +64,6 @@ class JoinOwner : AppCompatActivity() {
             val storename = storenameEditTextView.text.toString()
             val address = address.text.toString()
 
-
             //유저 만들기 값은 (id, pw)
             auth!!.createUserWithEmailAndPassword(id, pw).addOnCompleteListener { Task ->
                 //성공하면!

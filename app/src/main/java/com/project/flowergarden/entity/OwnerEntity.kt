@@ -1,11 +1,11 @@
 package com.project.flowergarden.entity
 
 
-data class OwnerEntity (
+data class OwnerEntity(
     val id: String,
     val pw: String,
     val storename: String,
-    val address: String
+    val address: String,
 )
 {
     constructor() : this("","", "","")

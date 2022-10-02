@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +15,11 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import com.project.flowergarden.databinding.ActivityMainOwnerBinding
 import kotlinx.android.synthetic.main.activity_main_owner.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivityOwner : AppCompatActivity() {
@@ -28,6 +32,9 @@ class MainActivityOwner : AppCompatActivity() {
     private var user: FirebaseUser? = null
     private lateinit var OwnerDB: DatabaseReference //실시간 데이터베이스
     private var userID: String? = null
+
+    private var fbStorage : FirebaseStorage? = null
+    private var uriPhoto : Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +105,18 @@ class MainActivityOwner : AppCompatActivity() {
             }
         }
     }
+
+    private fun funImageUpload(view : View){
+
+        var timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var imgFileName = "IMAGE_" + timeStamp + "_.png"
+        var storageRef = fbStorage?.reference?.child("images")?.child(imgFileName)
+
+        storageRef?.putFile(uriPhoto!!)?.addOnSuccessListener {
+            Toast.makeText(view.context, "Image Uploaded", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     companion object {
         const val REQUEST_FIRST = 1000

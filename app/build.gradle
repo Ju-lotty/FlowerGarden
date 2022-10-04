@@ -71,10 +71,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.8'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.6'
 
+    //맵 위도 경도를 위한 지오코딩 Retrofit 라이브러리
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
 
-    //Firebase SDK Add
-    implementation platform('com.google.firebase:firebase-bom:30.3.2')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+        //Firebase SDK Add
+        implementation platform('com.google.firebase:firebase-bom:30.3.2')
+        implementation 'com.google.firebase:firebase-analytics-ktx'
 
 
     //Navigation

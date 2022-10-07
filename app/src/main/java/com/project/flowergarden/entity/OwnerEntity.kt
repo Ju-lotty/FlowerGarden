@@ -6,8 +6,9 @@ data class OwnerEntity(
     val pw: String,
     val storename: String,
     val address: String,
-    val x: String
+    val x: String,
+    val y: String
 )
 {
-    constructor() : this("","", "","", "" )
+    constructor() : this("","", "","", "","" )
 }

@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
 import java.util.*
@@ -24,40 +26,12 @@ class NearLocation : Fragment(), OnMapReadyCallback {
 
     //mapView를 받아오기 위해 변수 설정
     private lateinit var mapView: MapView
-
     private lateinit var naverMap: NaverMap
 
-    private var auth: FirebaseAuth? = null //파이어베이스 인증
+    //파이어베이스 접근하기 위한 객체 생성
     //유저 정보 불러오기 (아이디, 닉네임 등)
-    private var user: FirebaseUser? = null
     private lateinit var OwnerDB: DatabaseReference //실시간 데이터베이스
-    private var userID: String? = null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        auth = FirebaseAuth.getInstance()
-        user = FirebaseAuth.getInstance().currentUser
-        OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
-        userID = user!!.uid
-
-
-
-
-        OwnerDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val address = snapshot.child("address").value.toString()
-
-
-
-            }
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +51,10 @@ class NearLocation : Fragment(), OnMapReadyCallback {
 
         //getMapAsync 메서드를 호출하여 프래그먼트에서 콜백을 설정, 비동기로 NaverMap 객체를 얻을 수 있습니다.
         mapView.getMapAsync(this)
+
+        //OnCreate에서 database 객체를 초기화 해줬다.
+        OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
+
     }
 
     //뷰 시작시 위치 이동
@@ -95,6 +73,24 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         //현위치 추적, 나선형 꼴 모양
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+        OwnerDB.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(i in snapshot.children) {
+
+
+                    val marker = Marker()
+                    marker.icon = OverlayImage.fromResource(R.drawable.ic_marker)
+                    marker.position = LatLng(37.5768036, 127.0488124)
+                    marker.position = LatLng(37.4736970, 127.1062989)
+                    marker.position = LatLng(37.5768036, 127.0488124)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
 
     }
 

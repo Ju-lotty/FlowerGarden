@@ -15,7 +15,9 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ownerEntity: OwnerEntity) = with(binding) {
-            storeName.text = ownerEntity.id
+            storeName.text = ownerEntity.storename
+            address.text = ownerEntity.address
+
 
             root.setOnClickListener {
                 listener(ownerEntity)

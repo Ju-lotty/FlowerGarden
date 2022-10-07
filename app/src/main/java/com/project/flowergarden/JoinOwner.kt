@@ -2,12 +2,10 @@ package com.project.flowergarden
 
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -73,7 +71,8 @@ class JoinOwner : AppCompatActivity() {
                                 }
                                 response.body()?.let {
                                     it.addresses.forEach {
-                                        x_Result.text = it.toString()
+                                        x_Result.text = it.x.toString()
+                                        y_Result.text = it.y.toString()
                                         Log.d("결과", "결과는 : $it")
                                     }
                                 }
@@ -98,6 +97,7 @@ class JoinOwner : AppCompatActivity() {
             val storename = storenameEditTextView.text.toString()
             val address = address.text.toString()
             val x = x_Result.text.toString()
+            val y = y_Result.text.toString()
 
 
             //유저 만들기 값은 (id, pw)
@@ -105,7 +105,7 @@ class JoinOwner : AppCompatActivity() {
                 //성공하면!
                 if(Task.isSuccessful) {
                     //OwnerEntity 데이터 클래스의 값 추가하기
-                    val owner = OwnerEntity(id, pw, storename, address, x)
+                    val owner = OwnerEntity(id, pw, storename, address, x, y)
                     Log.d("회원가입", "회원가입 성공")
                     //아이디 비번 점주명 주소 값 설정 한 값의 경로 지정!
                     FirebaseDatabase.getInstance().getReference("Owner")

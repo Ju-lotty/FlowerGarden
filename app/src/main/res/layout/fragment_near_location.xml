@@ -14,14 +14,5 @@
         app:ignore="NamespaceTypo"
         app:navermap_locationButtonEnabled="true" />
 
-    <com.naver.maps.map.widget.LocationButtonView
-        android:id="@+id/navermap_location_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="12dp"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

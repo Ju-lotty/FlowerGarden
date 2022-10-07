@@ -10,3 +10,8 @@ data class Geocode(
     // 응답 버디 중 원하는 값 출력, 필수여부 N
     @SerializedName("addresses")val addresses: Array<AddressesDTO>
 )
+
+data class AddressesDTO(
+    val x: String,
+    val y: String
+)

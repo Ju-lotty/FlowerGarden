@@ -16,6 +16,7 @@ import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
 
+
 class Home : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -25,9 +26,11 @@ class Home : Fragment() {
 
     //유저 정보 불러오기 (아이디, 닉네임 등)
     private var user: FirebaseUser? = null
+    private var owner: FirebaseUser? = null
     private lateinit var UserDB: DatabaseReference //실시간 데이터베이스
     private lateinit var OwnerDB: DatabaseReference
     private var userID: String? = null
+    private var ownerID: String? = null
 
 
     override fun onCreateView(
@@ -50,29 +53,37 @@ class Home : Fragment() {
         UserDB = FirebaseDatabase.getInstance().getReference("User")
         userID = user!!.uid
 
+
         OwnerDB.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                adapter.setData(OwnerEntity(snapshot.value.toString(),"","","","")) {
-                    activity?.let {
-                        val intent = Intent(context, StoreDetailActivity::class.java)
-                        intent.putExtra("owner","{$it}")
-                        activity!!.startActivity(intent)
+                    for (i in snapshot.children) {
+                        var a  = i.child("storename").value.toString()
+                        val b = i.child("address").value.toString()
+                        Log.d("결과는!", "${a}")
+                        adapter.setData(OwnerEntity("","","${a}","${b}","","")) {
+                            activity?.let {
+                                val intent = Intent(context, StoreDetailActivity::class.java)
+                                intent.putExtra("owner","{$it}")
+                                activity!!.startActivity(intent)
+                            }
+                        }
                     }
-                }
-                /*adapter.storeList.add(OwnerEntity("", "", snapshot.child("storename").value.toString()))
-                adapter.notifyDataSetChanged()
-                Log.e("User", "")*/
+                    val b = snapshot.children
+                Log.d("결과는~!", "${b}")
+
+
+
+
+
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
 
         })
-        //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
         UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
-
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.e("2", "${snapshot.value}")
+                Log.e("결과는~", "${snapshot.value.toString()}")
                 val nickname = snapshot.child("nickname").value.toString()
                 binding.userNameTextView.text = "${nickname.toString()}님 환영합니다!"
                 //val nickname = snapshot.value
@@ -82,6 +93,7 @@ class Home : Fragment() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+        //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
     }
 
     private fun viewFlipper() = with(binding) {

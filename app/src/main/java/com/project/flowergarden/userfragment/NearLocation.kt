@@ -1,7 +1,6 @@
 package com.project.flowergarden.userfragment
 
 import android.annotation.SuppressLint
-import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,11 +11,11 @@ import com.google.firebase.database.*
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
 import kotlinx.android.synthetic.main.fragment_near_location.*
+import kotlinx.android.synthetic.main.fragment_near_location.view.*
 
 //OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있으며  객체(NaverMap)가 준비되면 onMapReady() 콜백 메서드가 호출
 class NearLocation : Fragment(), OnMapReadyCallback {
@@ -75,10 +74,11 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
 
-        OwnerDB.addListenerForSingleValueEvent(object : ValueEventListener{
-            @SuppressLint("LogNotTimber")
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for(i in snapshot.children) {
+        context?.let {
+            OwnerDB.addListenerForSingleValueEvent(object : ValueEventListener{
+                @SuppressLint("LogNotTimber")
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for(i in snapshot.children) {
                         val x = i.child("x").value //경도 값 뽑아오기
                         val y = i.child("y").value //위도 값 뽑아오기
                         //val x, y 예시) 37.12312321 127.123815 -> split으로 나눠서 값 위도 따로 경도 따로 나누기
@@ -88,17 +88,28 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                         Log.d("y_Result 값은", "${y_Result}")
                         Log.d("x_Reuslt 값은", "${x_Reuslt}")
                         val marker = Marker()
-                        marker.icon = OverlayImage.fromResource(R.drawable.ic_marker1)
+                        marker.icon = OverlayImage.fromResource(R.drawable.ic_marker)
                         marker.position = LatLng(y_Result, x_Reuslt)
+                        card_view.visibility = View.GONE
+                        marker.setOnClickListener { overlay ->
+                            card_view.visibility = View.VISIBLE
+                            val storeName = i.child("storename").value
+                            card_view.storeName.text = storeName.toString()
+                            true
+                        }
+                        naverMap.setOnMapClickListener { _, _ ->
+                            card_view.visibility = View.GONE
+                        }
                         marker.map = naverMap
+                    }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
 
-        })
+            })
+        }
     }
 
     //권한 요청 이후 유저가 권한을 허용 했을 시

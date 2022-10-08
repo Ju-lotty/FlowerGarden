@@ -66,6 +66,10 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    //카드뷰 라이브러리
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+
 
     //Firebase
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.8'

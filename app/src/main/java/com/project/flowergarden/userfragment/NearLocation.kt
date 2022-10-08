@@ -1,22 +1,22 @@
 package com.project.flowergarden.userfragment
 
-import android.location.Geocoder
+import android.annotation.SuppressLint
+import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
-import java.util.*
+import kotlinx.android.synthetic.main.fragment_near_location.*
 
 //OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있으며  객체(NaverMap)가 준비되면 onMapReady() 콜백 메서드가 호출
 class NearLocation : Fragment(), OnMapReadyCallback {
@@ -74,24 +74,31 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-        OwnerDB.addListenerForSingleValueEvent(object : ValueEventListener {
 
+        OwnerDB.addListenerForSingleValueEvent(object : ValueEventListener{
+            @SuppressLint("LogNotTimber")
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(i in snapshot.children) {
-
-
-                    val marker = Marker()
-                    marker.icon = OverlayImage.fromResource(R.drawable.ic_marker)
-                    marker.position = LatLng(37.5768036, 127.0488124)
-                    marker.position = LatLng(37.4736970, 127.1062989)
-                    marker.position = LatLng(37.5768036, 127.0488124)
+                        val x = i.child("x").value //경도 값 뽑아오기
+                        val y = i.child("y").value //위도 값 뽑아오기
+                        //val x, y 예시) 37.12312321 127.123815 -> split으로 나눠서 값 위도 따로 경도 따로 나누기
+                        val latlong = "${y} ${x}".split(" ").toTypedArray()
+                        val y_Result = latlong[0].toDouble()
+                        val x_Reuslt = latlong[1].toDouble()
+                        Log.d("y_Result 값은", "${y_Result}")
+                        Log.d("x_Reuslt 값은", "${x_Reuslt}")
+                        val marker = Marker()
+                        marker.icon = OverlayImage.fromResource(R.drawable.ic_marker1)
+                        marker.position = LatLng(y_Result, x_Reuslt)
+                        marker.map = naverMap
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
             }
-        })
 
+        })
     }
 
     //권한 요청 이후 유저가 권한을 허용 했을 시
@@ -148,3 +155,4 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 }
+

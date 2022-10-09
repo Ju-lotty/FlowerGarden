@@ -125,6 +125,7 @@
         app:layout_constraintTop_toBottomOf="@id/value_Nickname" />
 
     <EditText
+        android:id="@+id/number"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -153,7 +154,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/value_number" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
         android:id="@+id/openTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -168,11 +169,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/value_number" />
 
+    <TimePicker
+        android:background="@color/white"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="140dp"
+        android:id="@+id/selectOpenTime"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/timeCheckButton"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginHorizontal="150dp"
+        android:text="확인"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/font"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_login"
+        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/notting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:background="#00ff0000"
         android:fontFamily="@font/font"
         android:text="~"
@@ -181,7 +209,7 @@
         app:layout_constraintStart_toEndOf="@id/openTime"
         app:layout_constraintTop_toBottomOf="@id/value_number" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
         android:id="@+id/closeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -193,6 +221,21 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/notting"
         app:layout_constraintTop_toBottomOf="@id/value_number" />
+
+    <TimePicker
+        android:visibility="gone"
+        android:timePickerMode="clock"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="140dp"
+        android:layout_marginHorizontal="50dp"
+        android:background="@color/white"
+        android:id="@+id/selectCloseTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
     <TextView

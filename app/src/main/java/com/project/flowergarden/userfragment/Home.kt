@@ -59,8 +59,10 @@ class Home : Fragment() {
                     for (i in snapshot.children) {
                         var a  = i.child("storename").value.toString()
                         val b = i.child("address").value.toString()
+                        val c = i.child("opentime").value.toString()
+                        val d = i.child("closetime").value.toString()
                         Log.d("결과는!", "${a}")
-                        adapter.setData(OwnerEntity("","","${a}","${b}","","")) {
+                        adapter.setData(OwnerEntity("","","${a}","","${c}","${d}","${b}","","")) {
                             activity?.let {
                                 val intent = Intent(context, StoreDetailActivity::class.java)
                                 intent.putExtra("owner","{$it}")

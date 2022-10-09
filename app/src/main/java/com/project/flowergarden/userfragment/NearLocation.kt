@@ -14,8 +14,11 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
+import kotlinx.android.synthetic.main.activity_join_owner.view.*
 import kotlinx.android.synthetic.main.fragment_near_location.*
 import kotlinx.android.synthetic.main.fragment_near_location.view.*
+import kotlinx.android.synthetic.main.fragment_near_location.view.closeTime
+import kotlinx.android.synthetic.main.fragment_near_location.view.openTime
 
 //OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있으며  객체(NaverMap)가 준비되면 onMapReady() 콜백 메서드가 호출
 class NearLocation : Fragment(), OnMapReadyCallback {
@@ -74,7 +77,6 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
 
-        context?.let {
             OwnerDB.addListenerForSingleValueEvent(object : ValueEventListener{
                 @SuppressLint("LogNotTimber")
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -94,7 +96,14 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                         marker.setOnClickListener { overlay ->
                             card_view.visibility = View.VISIBLE
                             val storeName = i.child("storename").value
+                            val opentime = i.child("opentime").value
+                            val closetime = i.child("closetime").value
+                            val storeNumber = i.child("number").value
+
                             card_view.storeName.text = storeName.toString()
+                            card_view.openTime.text = opentime.toString()
+                            card_view.closeTime.text = closetime.toString()
+                            card_view.storeNumber.text = storeNumber.toString()
                             true
                         }
                         naverMap.setOnMapClickListener { _, _ ->
@@ -103,13 +112,10 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                         marker.map = naverMap
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-
             })
-        }
     }
 
     //권한 요청 이후 유저가 권한을 허용 했을 시

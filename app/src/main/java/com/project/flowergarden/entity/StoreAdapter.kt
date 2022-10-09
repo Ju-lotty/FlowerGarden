@@ -17,6 +17,8 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
         fun bind(ownerEntity: OwnerEntity) = with(binding) {
             storeName.text = ownerEntity.storename
             address.text = ownerEntity.address
+            openTime.text = ownerEntity.opentime
+            closeTime.text = ownerEntity.closetime
 
 
             root.setOnClickListener {

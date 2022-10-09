@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -15,6 +16,9 @@ import com.project.flowergarden.databinding.ActivityJoinOwnerBinding
 import com.project.flowergarden.entity.Geocode
 import com.project.flowergarden.entity.OwnerEntity
 import kotlinx.android.synthetic.main.activity_join_owner.*
+import kotlinx.android.synthetic.main.activity_join_owner.closeTime
+import kotlinx.android.synthetic.main.activity_join_owner.openTime
+import kotlinx.android.synthetic.main.fragment_near_location.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,6 +42,8 @@ class JoinOwner : AppCompatActivity() {
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
         JoinOwnerinit()
+        openTimeinit()
+        closeTimeinit()
 
         addressButton.setOnClickListener {
             Intent(this, AddressWebView::class.java).apply {
@@ -87,6 +93,48 @@ class JoinOwner : AppCompatActivity() {
         }
     }
 
+    private fun openTimeinit() = with(binding) {
+        openTime.setOnClickListener {
+            addressButton.visibility = View.GONE
+            timeCheckButton.visibility = View.VISIBLE
+            selectOpenTime.visibility = View.VISIBLE
+            selectOpenTime.setOnTimeChangedListener { view, hourOfDay, minute ->
+                openTime.text = "$hourOfDay" + ":" + "$minute"
+                Log.d("결과는!", "$hourOfDay $minute")
+                Log.d("openTime 결과는!", "$openTime")
+                when(minute) {
+                    0 -> openTime.text = "$hourOfDay" + ":" + "00"
+                }
+            }
+            timeCheckButton.setOnClickListener {
+                selectOpenTime.visibility = View.GONE
+                timeCheckButton.visibility = View.GONE
+                addressButton.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun closeTimeinit() = with(binding) {
+        closeTime.setOnClickListener {
+            addressButton.visibility = View.GONE
+            timeCheckButton.visibility = View.VISIBLE
+            selectCloseTime.visibility = View.VISIBLE
+            selectCloseTime.setOnTimeChangedListener { view, hourOfDay, minute ->
+                closeTime.text = "$hourOfDay" + ":" + "$minute"
+                Log.d("결과는!", "$hourOfDay $minute")
+                Log.d("openTime 결과는!", "$openTime")
+                when(minute) {
+                    0 -> closeTime.text = "$hourOfDay" + ":" + "00"
+                }
+            }
+            timeCheckButton.setOnClickListener {
+                selectCloseTime.visibility = View.GONE
+                timeCheckButton.visibility = View.GONE
+                addressButton.visibility = View.VISIBLE
+            }
+        }
+    }
+
     private fun JoinOwnerinit() = with(binding) {
         //점주로 회원가입 버튼을 누르면
         joinOwnerButton.setOnClickListener {
@@ -95,17 +143,19 @@ class JoinOwner : AppCompatActivity() {
             val id = idEditTextView.text.toString()
             val pw = passwordEditTextView.text.toString()
             val storename = storenameEditTextView.text.toString()
+            val number = number.text.toString()
+            val opentime = openTime.text.toString()
+            val closetime = closeTime.text.toString()
             val address = address.text.toString()
             val x = x_Result.text.toString()
             val y = y_Result.text.toString()
-
 
             //유저 만들기 값은 (id, pw)
             auth!!.createUserWithEmailAndPassword(id, pw).addOnCompleteListener { Task ->
                 //성공하면!
                 if(Task.isSuccessful) {
                     //OwnerEntity 데이터 클래스의 값 추가하기
-                    val owner = OwnerEntity(id, pw, storename, address, x, y)
+                    val owner = OwnerEntity(id, pw, storename, number, opentime, closetime, address, x, y)
                     Log.d("회원가입", "회원가입 성공")
                     //아이디 비번 점주명 주소 값 설정 한 값의 경로 지정!
                     FirebaseDatabase.getInstance().getReference("Owner")

@@ -36,15 +36,38 @@
             app:layout_constraintTop_toTopOf="@id/iv_profile" />
 
         <TextView
-            android:id="@+id/tv_age"
+            android:id="@+id/openTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:text="♥ 24"
-            android:textColor="#FFFF0000"
+            android:text="09:00"
+            android:textColor="#101C68"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/storeName"
+            app:layout_constraintTop_toTopOf="@id/iv_profile" />
+
+        <TextView
+            android:id="@+id/notting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="~"
+            android:textColor="#101C68"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/openTime"
+            app:layout_constraintTop_toTopOf="@id/iv_profile" />
+        <TextView
+            android:id="@+id/closeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="20:00"
+            android:textColor="#101C68"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/notting"
             app:layout_constraintTop_toTopOf="@id/iv_profile" />
 
         <TextView

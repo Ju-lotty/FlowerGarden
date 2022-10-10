@@ -8,10 +8,11 @@ data class OwnerEntity(
     val number: String,
     val opentime: String,
     val closetime: String,
+    val openday: String,
     val address: String,
     val x: String,
-    val y: String
+    val y: String,
 )
 {
-    constructor() : this("","", "","", "","" ,"","","")
+    constructor() : this("","", "","", "","" ,"","","","")
 }

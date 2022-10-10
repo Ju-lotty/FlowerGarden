@@ -146,6 +146,7 @@ class JoinOwner : AppCompatActivity() {
             val number = number.text.toString()
             val opentime = openTime.text.toString()
             val closetime = closeTime.text.toString()
+            val openday = openDay.text.toString()
             val address = address.text.toString()
             val x = x_Result.text.toString()
             val y = y_Result.text.toString()
@@ -155,7 +156,7 @@ class JoinOwner : AppCompatActivity() {
                 //성공하면!
                 if(Task.isSuccessful) {
                     //OwnerEntity 데이터 클래스의 값 추가하기
-                    val owner = OwnerEntity(id, pw, storename, number, opentime, closetime, address, x, y)
+                    val owner = OwnerEntity(id, pw, storename, number, opentime, closetime, openday, address, x, y)
                     Log.d("회원가입", "회원가입 성공")
                     //아이디 비번 점주명 주소 값 설정 한 값의 경로 지정!
                     FirebaseDatabase.getInstance().getReference("Owner")

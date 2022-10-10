@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +17,8 @@ import com.project.flowergarden.StoreDetailActivity
 import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_store.*
 
 
 class Home : Fragment() {
@@ -61,24 +65,17 @@ class Home : Fragment() {
                         val b = i.child("address").value.toString()
                         val c = i.child("opentime").value.toString()
                         val d = i.child("closetime").value.toString()
+                        val e = i.child("openday").value.toString()
                         Log.d("결과는!", "${a}")
-                        adapter.setData(OwnerEntity("","","${a}","","${c}","${d}","${b}","","")) {
-                            activity?.let {
-                                val intent = Intent(context, StoreDetailActivity::class.java)
-                                intent.putExtra("owner","{$it}")
-                                activity!!.startActivity(intent)
+
+                        if(storeList.isEmpty()) {
+                            adapter.setData(OwnerEntity("", "", "${a}", "","${c}", "${d}", "${e}", "${b}", "", "")) {
                             }
+                        } else if (storeList.isNotEmpty()) {
+                            return
                         }
                     }
-                    val b = snapshot.children
-                Log.d("결과는~!", "${b}")
-
-
-
-
-
             }
-
             override fun onCancelled(error: DatabaseError) {
             }
 

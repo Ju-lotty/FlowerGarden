@@ -237,6 +237,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView
+        android:id="@+id/value_OpenDay"
+        android:layout_width="110dp"
+        android:layout_marginEnd="130dp"
+        android:fontFamily="@font/font"
+        android:text="운영요일"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/value_Time"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/openDay"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
+        android:hint="운영요일을 입력해주세요."
+        android:inputType="text"
+        android:maxLength="20"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="18sp"
+        android:layout_marginStart="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="65dp"
+        app:layout_constraintBottom_toTopOf="@id/address"
+        app:layout_constraintTop_toBottomOf="@id/notting" />
 
     <TextView
         android:id="@+id/value_Address"
@@ -249,7 +278,7 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/value_Time" />
+        app:layout_constraintTop_toBottomOf="@id/value_OpenDay" />
 
 
     <androidx.appcompat.widget.AppCompatButton

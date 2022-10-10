@@ -19,6 +19,7 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
             address.text = ownerEntity.address
             openTime.text = ownerEntity.opentime
             closeTime.text = ownerEntity.closetime
+            openDay.text = ownerEntity.openday
 
 
             root.setOnClickListener {
@@ -38,7 +39,7 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = storeList.size
 
-    fun setData(ownerEntity: OwnerEntity,listener: (OwnerEntity) -> Unit){
+    fun setData(ownerEntity: OwnerEntity,listener: (OwnerEntity) -> Unit) {
         storeList.add(ownerEntity)
         itemClickListener  = listener
         notifyDataSetChanged()

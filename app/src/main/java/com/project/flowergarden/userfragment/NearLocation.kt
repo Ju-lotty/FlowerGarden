@@ -60,6 +60,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     }
 
     //뷰 시작시 위치 이동
+   @SuppressLint("SuspiciousIndentation")
    override fun onMapReady(naverMap: NaverMap) {
 
         //NaverMap으로부터 UiSettings 인스턴스를 가져오기 (위치, 나침반, 실내지도 층 피커, 줌버튼)
@@ -99,11 +100,13 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                             val opentime = i.child("opentime").value
                             val closetime = i.child("closetime").value
                             val storeNumber = i.child("number").value
+                            val openday = i.child("openday").value
 
                             card_view.storeName.text = storeName.toString()
                             card_view.openTime.text = opentime.toString()
                             card_view.closeTime.text = closetime.toString()
                             card_view.storeNumber.text = storeNumber.toString()
+                            card_view.openDay1.text = openday.toString()
                             true
                         }
                         naverMap.setOnMapClickListener { _, _ ->

@@ -20,11 +20,11 @@ class StoreDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_detail)
+        val secondIntent = intent
+        nickNameTextView.text = secondIntent.getStringExtra("storeName")
+        addressTextView.text = secondIntent.getStringExtra("address")
 
-        OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
 
-        intent.getStringExtra("owner").let {
-            Toast.makeText(this,"${it}",Toast.LENGTH_SHORT).show()
-        }
+
     }
 }

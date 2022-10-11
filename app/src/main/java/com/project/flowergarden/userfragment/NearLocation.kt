@@ -1,6 +1,7 @@
 package com.project.flowergarden.userfragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
+import com.project.flowergarden.StoreDetailActivity
 import kotlinx.android.synthetic.main.activity_join_owner.view.*
 import kotlinx.android.synthetic.main.fragment_near_location.*
 import kotlinx.android.synthetic.main.fragment_near_location.view.*
@@ -101,14 +103,29 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                             val closetime = i.child("closetime").value
                             val storeNumber = i.child("number").value
                             val openday = i.child("openday").value
-
+                            val address = i.child("address").value
                             card_view.storeName.text = storeName.toString()
                             card_view.openTime.text = opentime.toString()
                             card_view.closeTime.text = closetime.toString()
                             card_view.storeNumber.text = storeNumber.toString()
                             card_view.openDay1.text = openday.toString()
+                            card_view.setOnClickListener {
+                                val intent = Intent(context, StoreDetailActivity::class.java)
+                                intent.apply {
+                                    intent.putExtra("storeName", "${storeName}")
+                                    intent.putExtra("opentime", "${opentime}")
+                                    intent.putExtra("closetime", "${closetime}")
+                                    intent.putExtra("storeNumber", "${storeNumber}")
+                                    intent.putExtra("openday", "${openday}")
+                                    intent.putExtra("address", "${address}")
+                                }
+                                startActivity(intent)
+                            }
                             true
                         }
+
+
+
                         naverMap.setOnMapClickListener { _, _ ->
                             card_view.visibility = View.GONE
                         }

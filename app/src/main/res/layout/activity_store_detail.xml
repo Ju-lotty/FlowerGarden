@@ -52,7 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nickNameTextView"
-
         tools:text="서울특별시 노원구 초안산로 2" />
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -67,25 +66,116 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addressTextView" />
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="350dp"
+            android:layout_height="310dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="160dp"
+            android:background="@drawable/shape_view"/>
+        <View
+            android:layout_width="330dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/shape_view2"/>
+
+        <View
+            android:layout_width="330dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/shape_view2"/>
+        <ImageView
+            android:layout_marginStart="40dp"
+            android:layout_gravity="center|start"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/ic_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:fontFamily="@font/font"
+            android:textColor="@color/black"
+            android:layout_marginStart="70dp"
+            android:layout_gravity="center|start"
+            android:layout_marginTop="72.5dp"
+            android:text="운영시간 : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/timeTextView"
+            android:fontFamily="@font/font"
+            android:textColor="@color/black"
+            android:layout_marginStart="130dp"
+            android:layout_gravity="center|start"
+            android:layout_marginTop="72.5dp"
+            android:text="09:00~21:00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginStart="40dp"
+            android:layout_gravity="center|start"
+            android:layout_marginTop="110dp"
+            android:src="@drawable/ic_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/numberTextView"
+            android:fontFamily="@font/font"
+            android:textColor="@color/black"
+            android:layout_marginStart="70dp"
+            android:layout_gravity="center|start"
+            android:layout_marginTop="110dp"
+            android:text="02-3635-4358"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/openDayTextView"
+            android:fontFamily="@font/font"
+            android:textColor="@color/black"
+            android:layout_marginStart="200dp"
+            android:layout_gravity="center|start"
+            android:layout_marginTop="110dp"
+            android:text="월 화 수 목 금 공휴일 휴무"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     <TextView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/storeImageButton"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/font"
         android:text="[ 가게정보 ]"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <View
-        android:background="#E1D3D3"
-        android:layout_width="0dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/storeImageButton" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
+            android:text="야간할인 19:00 ~22:00\n동양란, 관엽, 꽃바구니, 야생화 보유\n\n\n\n조화, 드라이플라워 원데이클래스 문의"
+            android:layout_marginTop="220dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/storeImageButton" />
+
+
+
+
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

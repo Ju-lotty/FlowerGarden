@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
@@ -18,7 +19,9 @@ import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_near_location.*
 import kotlinx.android.synthetic.main.item_store.*
+import kotlinx.android.synthetic.main.item_store.storeName
 
 
 class Home : Fragment() {
@@ -47,7 +50,8 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewFlipper()
+
+
         binding.storeList.layoutManager = LinearLayoutManager(activity)
         binding.storeList.adapter = adapter
         auth = FirebaseAuth.getInstance()
@@ -57,29 +61,11 @@ class Home : Fragment() {
         UserDB = FirebaseDatabase.getInstance().getReference("User")
         userID = user!!.uid
 
-
-        OwnerDB.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                    for (i in snapshot.children) {
-                        var a  = i.child("storename").value.toString()
-                        val b = i.child("address").value.toString()
-                        val c = i.child("opentime").value.toString()
-                        val d = i.child("closetime").value.toString()
-                        val e = i.child("openday").value.toString()
-                        Log.d("결과는!", "${a}")
-
-                        if(storeList.isEmpty()) {
-                            adapter.setData(OwnerEntity("", "", "${a}", "","${c}", "${d}", "${e}", "${b}", "", "")) {
-                            }
-                        } else if (storeList.isNotEmpty()) {
-                            return
-                        }
-                    }
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
+        getUserName()
+        viewFlipper()
+        ownerList()
+    }
+    private fun getUserName() {
         UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Log.e("결과는~", "${snapshot.value.toString()}")
@@ -92,13 +78,45 @@ class Home : Fragment() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
-        //UserDB.child("User").child(uid).child("nickname").addValueEventListener(object:  ValueEventListener() {
     }
-
     private fun viewFlipper() = with(binding) {
         viewFlipper.startFlipping()
         viewFlipper.flipInterval = 3000
         viewFlipper.setInAnimation(activity?.applicationContext, android.R.anim.slide_in_left)
         viewFlipper.setOutAnimation(activity?.applicationContext, android.R.anim.slide_out_right)
+    }
+    private fun ownerList() = with(binding) {
+        OwnerDB.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (i in snapshot.children) {
+                    var storeName = i.child("storename").value.toString()
+                    val address = i.child("address").value.toString()
+                    val opentime = i.child("opentime").value.toString()
+                    val closetime = i.child("closetime").value.toString()
+                    val openday = i.child("openday").value.toString()
+                    val storeNumber = i.child("number").value.toString()
+                    Log.d("결과는!", "${storeName}")
+
+                    if (storeList.isEmpty()) {
+                        adapter.setData(OwnerEntity("", "", "${storeName}", "", "${opentime}", "${closetime}", "${openday}", "${address}", "", "")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
+                            /*intent.apply {
+                                intent.putExtra("storeName", "${storeName}")
+                                intent.putExtra("opentime", "${opentime}")
+                                intent.putExtra("closetime", "${closetime}")
+                                intent.putExtra("storeNumber", "${storeNumber}")
+                                intent.putExtra("openday", "${openday}")
+                                intent.putExtra("address", "${address}")
+                            }
+                            Toast.makeText(context, "액티비티 이동!", Toast.LENGTH_SHORT).show()
+                            startActivity(intent)*/
+                        }
+                    } else if (storeList.isNotEmpty()) {
+                        return
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 }

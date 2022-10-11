@@ -62,8 +62,8 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     }
 
     //뷰 시작시 위치 이동
-   @SuppressLint("SuspiciousIndentation")
-   override fun onMapReady(naverMap: NaverMap) {
+    @SuppressLint("SuspiciousIndentation")
+    override fun onMapReady(naverMap: NaverMap) {
 
         //NaverMap으로부터 UiSettings 인스턴스를 가져오기 (위치, 나침반, 실내지도 층 피커, 줌버튼)
         val uiSettings = naverMap.uiSettings
@@ -79,63 +79,68 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-
             OwnerDB.addListenerForSingleValueEvent(object : ValueEventListener{
-                @SuppressLint("LogNotTimber")
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for(i in snapshot.children) {
-                        val x = i.child("x").value //경도 값 뽑아오기
-                        val y = i.child("y").value //위도 값 뽑아오기
-                        //val x, y 예시) 37.12312321 127.123815 -> split으로 나눠서 값 위도 따로 경도 따로 나누기
-                        val latlong = "${y} ${x}".split(" ").toTypedArray()
-                        val y_Result = latlong[0].toDouble()
-                        val x_Reuslt = latlong[1].toDouble()
-                        Log.d("y_Result 값은", "${y_Result}")
-                        Log.d("x_Reuslt 값은", "${x_Reuslt}")
-                        val marker = Marker()
+            @SuppressLint("LogNotTimber")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(i in snapshot.children) {
+                    val x = i.child("x").value //경도 값 뽑아오기
+                    val y = i.child("y").value //위도 값 뽑아오기
+                    //val x, y 예시) 37.12312321 127.123815 -> split으로 나눠서 값 위도 따로 경도 따로 나누기
+                    val latlong = "${y} ${x}".split(" ").toTypedArray()
+                    val y_Result = latlong[0].toDouble()
+                    val x_Reuslt = latlong[1].toDouble()
+                    val storeName = i.child("storename").value
+                    val opentime = i.child("opentime").value
+                    val closetime = i.child("closetime").value
+                    val storeNumber = i.child("number").value
+                    val openday = i.child("openday").value
+                    val address = i.child("address").value
+
+                    Log.d("y_Result 값은", "${y_Result}")
+                    Log.d("x_Reuslt 값은", "${x_Reuslt}")
+
+                    val marker = Marker()
+                    marker.icon = OverlayImage.fromResource(R.drawable.ic_marker)
+                    //마커의 초기 아이콘 -> 조그만한 마커
+                    marker.position = LatLng(y_Result, x_Reuslt)
+
+                    card_view.visibility = View.GONE
+
+                    naverMap.setOnMapClickListener { _, _ ->
                         marker.icon = OverlayImage.fromResource(R.drawable.ic_marker)
-                        marker.position = LatLng(y_Result, x_Reuslt)
                         card_view.visibility = View.GONE
-                        marker.setOnClickListener { overlay ->
-                            card_view.visibility = View.VISIBLE
-                            val storeName = i.child("storename").value
-                            val opentime = i.child("opentime").value
-                            val closetime = i.child("closetime").value
-                            val storeNumber = i.child("number").value
-                            val openday = i.child("openday").value
-                            val address = i.child("address").value
-                            card_view.storeName.text = storeName.toString()
-                            card_view.openTime.text = opentime.toString()
-                            card_view.closeTime.text = closetime.toString()
-                            card_view.storeNumber.text = storeNumber.toString()
-                            card_view.openDay1.text = openday.toString()
-                            card_view.setOnClickListener {
-                                val intent = Intent(context, StoreDetailActivity::class.java)
-                                intent.apply {
-                                    intent.putExtra("storeName", "${storeName}")
-                                    intent.putExtra("opentime", "${opentime}")
-                                    intent.putExtra("closetime", "${closetime}")
-                                    intent.putExtra("storeNumber", "${storeNumber}")
-                                    intent.putExtra("openday", "${openday}")
-                                    intent.putExtra("address", "${address}")
-                                }
-                                startActivity(intent)
-                            }
-                            true
-                        }
-
-
-
-                        naverMap.setOnMapClickListener { _, _ ->
-                            card_view.visibility = View.GONE
-                        }
-                        marker.map = naverMap
                     }
+
+                    marker.setOnClickListener { overlay ->
+                        marker.icon = OverlayImage.fromResource(R.drawable.ic_clickedmarker)
+                        card_view.visibility = View.VISIBLE
+                        card_view.storeName.text = storeName.toString()
+                        card_view.openTime.text = opentime.toString()
+                        card_view.closeTime.text = closetime.toString()
+                        card_view.storeNumber.text = storeNumber.toString()
+                        card_view.openDay1.text = openday.toString()
+                        card_view.setOnClickListener {
+                            val intent = Intent(context, StoreDetailActivity::class.java)
+                            intent.apply {
+                                intent.putExtra("storeName", "${storeName}")
+                                intent.putExtra("opentime", "${opentime}")
+                                intent.putExtra("closetime", "${closetime}")
+                                intent.putExtra("storeNumber", "${storeNumber}")
+                                intent.putExtra("openday", "${openday}")
+                                intent.putExtra("address", "${address}")
+                            }
+                            startActivity(intent)
+                        }
+                        true
+                    }
+                    marker.map = naverMap
                 }
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     //권한 요청 이후 유저가 권한을 허용 했을 시

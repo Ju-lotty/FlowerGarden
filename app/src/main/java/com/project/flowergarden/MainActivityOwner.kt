@@ -18,6 +18,11 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.project.flowergarden.databinding.ActivityMainOwnerBinding
 import kotlinx.android.synthetic.main.activity_main_owner.*
+import kotlinx.android.synthetic.main.activity_main_owner.numberTextView
+import kotlinx.android.synthetic.main.activity_main_owner.openDayTextView
+import kotlinx.android.synthetic.main.activity_main_owner.storeImageButton
+import kotlinx.android.synthetic.main.activity_store_detail.*
+import kotlinx.android.synthetic.main.fragment_near_location.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -50,9 +55,16 @@ class MainActivityOwner : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val nickname = snapshot.child("storename").value.toString()
-                binding.nickNameTextView.text = nickname
                 val address = snapshot.child("address").value.toString()
+                val opentime = snapshot.child("opentime").value.toString()
+                val closetime = snapshot.child("closetime").value.toString()
+                val storeNumber = snapshot.child("number").value.toString()
+                val openday = snapshot.child("openday").value.toString()
+                binding.nickNameTextView.text = nickname
                 binding.addressTextView.text = address
+                binding.timeTextView.text = opentime + "~" + closetime
+                binding.numberTextView.text = storeNumber
+                binding.openDayTextView.text = openday
             }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")

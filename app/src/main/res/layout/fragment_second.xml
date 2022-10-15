@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ownerregister.Second">
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:max="150"
+        android:progressDrawable="@drawable/seekbar"
+        android:scaleX="2"
+        android:thumbTint="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_back"
+        app:layout_constraintEnd_toStartOf="@id/registerTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/registerTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="이메일 회원가입"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintTop_toTopOf="@id/backButton" />
+
+    <TextView
+        android:id="@+id/value_Storename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="점포명 입력"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+    <EditText
+        android:id="@+id/storeNameEditTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:hint="점포명을 입력해주세요."
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/value_Storename"
+        app:layout_constraintTop_toBottomOf="@+id/value_Storename" />
+
+    <TextView
+        android:id="@+id/storeNameCheckTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="점포명을 입력해야합니다."
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/storeNameEditTextView"
+        app:layout_constraintTop_toBottomOf="@id/storeNameEditTextView" />
+
+
+    <TextView
+        android:id="@+id/value_Number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="매장 전화번호 입력"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/storeNameEditTextView" />
+
+    <EditText
+        android:id="@+id/numberEditTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:hint="전화번호 입력"
+        android:inputType="phone"
+        android:maxLength="13"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/value_Number"
+        app:layout_constraintTop_toBottomOf="@+id/value_Number" />
+
+    <TextView
+        android:id="@+id/numberCheckTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전화번호를 입력해야합니다."
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@id/numberEditTextView"
+        app:layout_constraintTop_toBottomOf="@id/numberEditTextView" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/nextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_regect"
+        android:text="다음"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

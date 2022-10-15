@@ -4,18 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JoinUser">
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ownerregister.First">
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seekBar"
@@ -73,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:hint="이메일을 입력해주세요."
+        android:inputType="textEmailAddress"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/value_Email"
@@ -153,50 +143,14 @@
         app:layout_constraintStart_toStartOf="@id/passwordCheckEditTextView"
         app:layout_constraintTop_toBottomOf="@id/passwordCheckEditTextView" />
 
-
-
-
-
-    <TextView
-        android:id="@+id/value_Nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="닉네임 입력"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/backButton"
-        app:layout_constraintTop_toBottomOf="@id/passwordCheckEditTextView" />
-
-    <EditText
-        android:id="@+id/nickNAmeEditTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:hint="닉네임을 입력해주세요."
-        android:inputType="text"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/value_Nickname"
-        app:layout_constraintTop_toBottomOf="@id/value_Nickname" />
-
-    <TextView
-        android:id="@+id/nickNameCheckTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="존재하는 닉네임입니다."
-        android:textColor="#FF0000"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/nickNAmeEditTextView"
-        app:layout_constraintTop_toBottomOf="@id/nickNAmeEditTextView" />
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/joinUserButton"
+        android:id="@+id/nextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/shape_regect"
-        android:text="가입완료"
+        android:text="다음"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

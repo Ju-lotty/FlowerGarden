@@ -98,7 +98,7 @@ class Home : Fragment() {
                     Log.d("결과는!", "${storeName}")
 
                     if (storeList.isEmpty()) {
-                        adapter.setData(OwnerEntity("", "", "${storeName}", "", "${opentime}", "${closetime}", "${openday}", "${address}", "", "")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
+                        adapter.setData(OwnerEntity("", "", "${storeName}", "", "${address}", "${opentime}", "${closetime}", "${openday}", "", "")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
                             /*intent.apply {
                                 intent.putExtra("storeName", "${storeName}")
                                 intent.putExtra("opentime", "${opentime}")

@@ -3,7 +3,6 @@ package com.project.flowergarden
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.project.flowergarden.databinding.ActivityStartBinding
 
 class StartActivity : AppCompatActivity() {
@@ -17,17 +16,19 @@ class StartActivity : AppCompatActivity() {
 
     private fun buttonClickEvent() = with(binding) {
         registerOwnerButton.setOnClickListener {
-            Log.v("TAG","조인오너 버튼 눌림")
             val intent = Intent(this@StartActivity, JoinOwner::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         registerUserButton.setOnClickListener {
             val intent = Intent(this@StartActivity, JoinUser::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         loginButton.setOnClickListener {
             val intent = Intent(this@StartActivity, Login::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -27,10 +28,20 @@ class Login : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
         loginInit()
+        gotoStartinit()
     }
+
+    private fun gotoStartinit() = with(binding) {
+        gotoStart.setOnClickListener {
+            val intent = Intent(this@Login, StartActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     private fun loginInit() = with(binding) {
 
         loginButton.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val id = idEditTextView.text.toString()
             val pw = passwordEditTextView.text.toString()
 
@@ -47,10 +58,13 @@ class Login : AppCompatActivity() {
                             if(data == null){
                                 Toast.makeText(this@Login, "로그인을 성공하였습니다.", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@Login, MainActivityUser::class.java)
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                                progressBar.visibility = View.GONE
                                 startActivity(intent)
                             }else{
                                 Toast.makeText(this@Login, "로그인을 성공하였습니다.", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@Login, MainActivityOwner::class.java)
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                                 startActivity(intent)
                             }
                         }

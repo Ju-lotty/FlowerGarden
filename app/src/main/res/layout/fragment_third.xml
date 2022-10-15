@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ownerregister.Third">
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:max="150"
+        android:progressDrawable="@drawable/seekbar"
+        android:scaleX="2"
+        android:thumbTint="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_back"
+        app:layout_constraintEnd_toStartOf="@id/registerTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/registerTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:gravity="center"
+        android:text="이메일 회원가입"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintTop_toTopOf="@id/backButton" />
+
+    <TextView
+        android:id="@+id/value_Address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="주소"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addressButton"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/shape_register"
+        android:text="도로명 주소"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/value_Address"
+        app:layout_constraintStart_toEndOf="@id/value_Address"
+        app:layout_constraintTop_toTopOf="@id/value_Address" />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/value_Address"
+        app:layout_constraintTop_toBottomOf="@+id/value_Address" />
+
+    <TextView
+        android:id="@+id/storeNameCheckTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도로명 주소 버튼을 클릭해주세요."
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/value_Address"
+        app:layout_constraintTop_toBottomOf="@id/addressTextView" />
+
+
+    <TextView
+        android:id="@+id/value_OpenTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/addressTextView" />
+
+    <TextView
+        android:id="@+id/openTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00ff0000"
+        android:fontFamily="@font/font"
+        android:text="오픈시간"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/value_OpenTime"
+        app:layout_constraintTop_toBottomOf="@id/value_OpenTime" />
+
+    <TextView
+        android:id="@+id/notting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/font"
+        android:text="~"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/openTime"
+        app:layout_constraintStart_toEndOf="@id/openTime"
+        app:layout_constraintTop_toTopOf="@id/openTime" />
+
+    <TextView
+        android:id="@+id/closeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/font"
+        android:text="닫는시간"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/openTime"
+        app:layout_constraintStart_toEndOf="@id/openTime"
+        app:layout_constraintTop_toTopOf="@id/openTime" />
+
+    <TextView
+        android:id="@+id/timeCheckTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="운영시간을 입력해야합니다."
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@id/openTime"
+        app:layout_constraintTop_toBottomOf="@id/openTime" />
+
+
+    <TextView
+        android:id="@+id/value_OpenDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="운영요일"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/openTime" />
+
+    <EditText
+        android:id="@+id/openDayEditTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:hint="운영요일 입력"
+        android:inputType="text"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/backButton"
+        app:layout_constraintTop_toBottomOf="@+id/value_OpenDay" />
+
+    <TextView
+        android:id="@+id/openDayCheckTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="운영요일을 입력해야합니다."
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@id/openDayEditTextView"
+        app:layout_constraintTop_toBottomOf="@id/openDayEditTextView" />
+
+    <TextView
+        android:text="X의 결과"
+        android:id="@+id/x_Result"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Y의 결과"
+        android:layout_marginTop="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/y_Result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/joinOwnerButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_regect"
+        android:text="가입완료"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/timeFragmLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TimePicker
+            android:id="@+id/selectOpenTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="140dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/timeCheckButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/shape_login"
+            android:fontFamily="@font/font"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
+        <TimePicker
+            android:id="@+id/selectCloseTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="140dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

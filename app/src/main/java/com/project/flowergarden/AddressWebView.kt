@@ -4,6 +4,7 @@ package com.project.flowergarden
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -21,6 +22,7 @@ class AddressWebView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_address_web_view)
+        Log.d("결과~!!~!", "주소 웹뷰 들어옴 눌림!!")
         val webView = findViewById<WebView>(R.id.webView)
         //자바스크립트 구문 허용
         webView.settings.javaScriptEnabled = true
@@ -33,9 +35,9 @@ class AddressWebView : AppCompatActivity() {
                 webView.loadUrl("javascript:sample2_execDaumPostcode();")
             }
         }
-
-        //최초 웹뷰 로드
+       //최초 웹뷰 로드d
         webView.loadUrl("https://flowergarden-15279.web.app")
+
     }
 
     inner class BridgeInterface {

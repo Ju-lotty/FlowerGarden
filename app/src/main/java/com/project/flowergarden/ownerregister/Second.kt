@@ -95,7 +95,7 @@ class Second : Fragment() {
             bundle.putString("Email1", Email1)
             bundle.putString("Password1", Password1)
             third.arguments = bundle
-
+            requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, third).commit()
 
         }

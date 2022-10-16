@@ -99,6 +99,7 @@
         android:layout_height="wrap_content"
         android:text="도로명 주소 버튼을 클릭해주세요."
         android:textColor="#FF0000"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/value_Address"
         app:layout_constraintTop_toBottomOf="@id/addressTextView" />
 
@@ -156,6 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="운영시간을 입력해야합니다."
+        android:visibility="gone"
         android:textColor="#FF0000"
         app:layout_constraintStart_toStartOf="@id/openTime"
         app:layout_constraintTop_toBottomOf="@id/openTime" />
@@ -189,6 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="운영요일을 입력해야합니다."
+        android:visibility="gone"
         android:textColor="#FF0000"
         app:layout_constraintStart_toStartOf="@id/openDayEditTextView"
         app:layout_constraintTop_toBottomOf="@id/openDayEditTextView" />

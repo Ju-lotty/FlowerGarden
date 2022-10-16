@@ -157,11 +157,36 @@ class JoinUser : AppCompatActivity() {
                             Toast.makeText(this@JoinUser, "환영합니다! \n ${nickname}님!!", Toast.LENGTH_SHORT).show()
                             progressBar.visibility = View.GONE
                             val intent = Intent(this@JoinUser, StartActivity::class.java)
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                             startActivity(intent)
                         }
+                } else{
+                    Log.e("가입결과","${Task.exception?.message}")
+                    when(Task.exception?.message) {
+                        "The email address is badly formatted." ->  {
+                            progressBar.visibility = View.GONE
+                            Toast.makeText(this@JoinUser,"이메일 형식으로 입력하시오.", Toast.LENGTH_SHORT).show()
+                            emailEditTextView.text = null
+                            return@addOnCompleteListener
+                        }
+
+                        "The given password is invalid. [ Password should be at least 6 characters ]" ->  {
+                            progressBar.visibility = View.GONE
+                            Toast.makeText(this@JoinUser,"비밀번호는 8자리 이상입니다.", Toast.LENGTH_SHORT).show()
+                            passwordCheckEditTextView.text = null
+                            passwordEditTextView.text = null
+                            return@addOnCompleteListener
+                        }
+
+                        "The email address is already in use by another account." ->  {
+                            progressBar.visibility = View.GONE
+                            Toast.makeText(this@JoinUser,"이미 존재하는 이메일입니다.", Toast.LENGTH_SHORT).show()
+                            emailEditTextView.text = null
+                            return@addOnCompleteListener
+                        }
+                    }
                 }
             }
         }
     }
-
 }

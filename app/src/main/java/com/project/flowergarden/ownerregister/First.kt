@@ -128,7 +128,7 @@ class First : Fragment() {
             bundle.putString("Email", emailEditTextView.text.toString())
             bundle.putString("Password", passwordCheckEditTextView.text.toString())
             second.arguments = bundle
-
+            requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, second).commit()
 
         }

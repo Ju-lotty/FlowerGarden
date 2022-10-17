@@ -17,7 +17,7 @@ class MainActivityUser : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         val home1 = Home()
         val home2 = NearLocation()
         val home3 = Like()

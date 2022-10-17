@@ -45,7 +45,7 @@ class MainActivityOwner : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainOwnerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         auth = FirebaseAuth.getInstance()
         user = FirebaseAuth.getInstance().currentUser
         OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")

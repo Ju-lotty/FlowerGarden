@@ -1,5 +1,7 @@
 package com.project.flowergarden.userfragment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat.animate
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.*
 import com.naver.maps.geometry.LatLng
@@ -16,11 +19,9 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.project.flowergarden.R
 import com.project.flowergarden.StoreDetailActivity
-import kotlinx.android.synthetic.main.activity_join_owner.view.*
 import kotlinx.android.synthetic.main.fragment_near_location.*
 import kotlinx.android.synthetic.main.fragment_near_location.view.*
-import kotlinx.android.synthetic.main.fragment_near_location.view.closeTime
-import kotlinx.android.synthetic.main.fragment_near_location.view.openTime
+
 
 //OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있으며  객체(NaverMap)가 준비되면 onMapReady() 콜백 메서드가 호출
 class NearLocation : Fragment(), OnMapReadyCallback {
@@ -108,12 +109,12 @@ class NearLocation : Fragment(), OnMapReadyCallback {
 
                     naverMap.setOnMapClickListener { _, _ ->
                         marker.icon = OverlayImage.fromResource(R.drawable.ic_marker)
-                        card_view.visibility = View.GONE
+                        hideMenu()
                     }
 
                     marker.setOnClickListener { overlay ->
                         marker.icon = OverlayImage.fromResource(R.drawable.ic_clickedmarker)
-                        card_view.visibility = View.VISIBLE
+                        showMenu()
                         card_view.storeName.text = storeName.toString()
                         card_view.openTime.text = opentime.toString()
                         card_view.closeTime.text = closetime.toString()
@@ -155,6 +156,24 @@ class NearLocation : Fragment(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    private fun showMenu(){
+        card_view!!.visibility = View.VISIBLE
+        card_view!!.animate()
+            .alpha(1f)
+            .setDuration(ANIMATION_DURATION.toLong())
+            .setListener(null)
+    }
+
+    private fun hideMenu(){
+        card_view!!.animate()
+            .alpha(0f)
+            .setDuration(ANIMATION_DURATION.toLong())
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    card_view!!.visibility = View.GONE
+                }
+            })
+    }
 
     //아래 생명주기
     override fun onStart() {
@@ -195,6 +214,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
     //컴파일 시간에 결정되는 상수(값이 변하지 않음)
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+        private const val ANIMATION_DURATION = 500
     }
 }
 

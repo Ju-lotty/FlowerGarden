@@ -1,10 +1,12 @@
 package com.project.flowergarden
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.animation.AnimationUtils
 import com.project.flowergarden.databinding.ActivitySplashBinding
 
 class Splash : AppCompatActivity() {
@@ -29,11 +31,13 @@ class Splash : AppCompatActivity() {
     }
 
     private fun animation() {
-        binding.bottomLeft.playAnimation()
-        binding.bottomRight.playAnimation()
-        binding.bottomCenter.playAnimation()
         binding.bottomMiddle.playAnimation()
-        binding.name.playAnimation()
         binding.topVertical.playAnimation()
+        imageAnimation()
+    }
+    @SuppressLint("ResourceType")
+    private fun imageAnimation() {
+        val animation = AnimationUtils.loadAnimation(this@Splash, R.drawable.custom_fade_in)
+        binding.img.animation = animation
     }
 }

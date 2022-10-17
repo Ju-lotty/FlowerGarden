@@ -11,14 +11,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.project.flowergarden.R
 import com.project.flowergarden.StartActivity
 import com.project.flowergarden.databinding.FragmentFirstBinding
+import com.project.flowergarden.entity.OwnerEntity
+import kotlinx.android.synthetic.main.fragment_first.*
 
 
 class First : Fragment() {
 
+
+    private var auth: FirebaseAuth? = null //파이어베이스 인증
+
     private lateinit var binding: FragmentFirstBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +41,7 @@ class First : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
         checkinit()
+        auth = FirebaseAuth.getInstance()
 
         ObjectAnimator.ofInt(binding.seekBar, "progress", 60).start()
         binding.seekBar.isEnabled = false
@@ -42,6 +53,7 @@ class First : Fragment() {
 
         buttoninit()
     }
+
     private fun checkinit() = with(binding) {
         nextButton.isEnabled = false
         var check = false
@@ -128,10 +140,14 @@ class First : Fragment() {
             bundle.putString("Email", emailEditTextView.text.toString())
             bundle.putString("Password", passwordCheckEditTextView.text.toString())
             second.arguments = bundle
-            requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, second).commit()
-
+            requireActivity().overridePendingTransition(
+                android.R.anim.fade_in,
+                android.R.anim.fade_out
+            )
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, second).commit()
+            }
         }
     }
 
-}
+

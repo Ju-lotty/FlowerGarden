@@ -239,7 +239,6 @@ class Third : Fragment() {
                             val first = First()
                             progressBar.visibility = View.GONE
                             Toast.makeText(context,"이미 존재하는 이메일입니다.", Toast.LENGTH_SHORT).show()
-                            emailEditTextView.text = null
                             requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, first).commit()
                             return@addOnCompleteListener

@@ -97,6 +97,8 @@ class Third : Fragment() {
         if (requestCode == 1 && data != null) {
             selectedImg = data.data!!
             storePhoto.setImageURI(selectedImg)
+            val a = selectedImg.toString()
+            Log.d("셀렉티드이미지 결과 값 :", "$a")
         }
 
         when (requestCode) {
@@ -242,9 +244,10 @@ class Third : Fragment() {
 //                var imagesRef = storage!!.reference.child("images/").child(fileName)    //기본 참조 위치/images/${fileName}
 //                imagesRef.putFile(selectedImg!!)
 
-            val filename = UUID.randomUUID().toString()
-            val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-            ref.putFile(selectedImg!!)
+
+
+            val ref = FirebaseStorage.getInstance().reference.child("images").child(auth!!.currentUser?.email.toString()).putFile(selectedImg!!)
+
 
 
             val owner = OwnerEntity("$email", "$password", "$storename", "$number", address, opentime, closetime, openday, x, y, ref.toString())

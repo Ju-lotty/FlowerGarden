@@ -51,8 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addressTextView"
-        android:textAlignment="center"
-        android:background="@drawable/owner_img_shape"/>
+        android:textAlignment="center"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
@@ -18,10 +17,6 @@ import com.project.flowergarden.StoreDetailActivity
 import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_near_location.*
-import kotlinx.android.synthetic.main.item_store.*
-import kotlinx.android.synthetic.main.item_store.storeName
 
 
 class Home : Fragment() {
@@ -98,7 +93,7 @@ class Home : Fragment() {
                     Log.d("결과는!", "${storeName}")
 
                     if (storeList.isEmpty()) {
-                        adapter.setData(OwnerEntity("", "", "${storeName}", "", "${address}", "${opentime}", "${closetime}", "${openday}", "", "")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
+                        adapter.setData(OwnerEntity("", "", "${storeName}", "", "${address}", "${opentime}", "${closetime}", "${openday}", "", "","")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
                             /*intent.apply {
                                 intent.putExtra("storeName", "${storeName}")
                                 intent.putExtra("opentime", "${opentime}")

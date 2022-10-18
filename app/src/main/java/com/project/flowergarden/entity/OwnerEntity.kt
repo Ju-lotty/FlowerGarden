@@ -1,6 +1,7 @@
 package com.project.flowergarden.entity
 
 
+
 data class OwnerEntity(
     val email: String,
     val password: String,
@@ -12,7 +13,8 @@ data class OwnerEntity(
     val openday: String,
     val x: String,
     val y: String,
+    val photo: String
 )
 {
-    constructor() : this("","", "","", "","" ,"","","","")
+    constructor() : this("","", "","", "","" ,"","","","","")
 }

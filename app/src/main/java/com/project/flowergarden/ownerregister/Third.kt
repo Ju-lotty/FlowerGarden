@@ -33,8 +33,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 class Third : Fragment() {
     private lateinit var binding: FragmentThirdBinding
@@ -66,6 +65,7 @@ class Third : Fragment() {
         checkinit()
         joinOwnerinit()
 
+
         auth = FirebaseAuth.getInstance()
 
         backButton.setOnClickListener {
@@ -96,11 +96,11 @@ class Third : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 1 && data != null) {
+            check5 = true
+            trueCheck()
+            Log.d("체크확인5", "$check5")
             selectedImg = data.data!!
             storePhoto.setImageURI(selectedImg)
-            val a = selectedImg.toString()
-            Log.d("셀렉티드이미지 결과 값 :", "$a")
-            check5 = true
         }
 
         when (requestCode) {
@@ -108,8 +108,10 @@ class Third : Fragment() {
                 if (resultCode == RESULT_OK) {
                     // 주소를 가져와서 보여주는 부분
                     val addressData = data?.extras?.getString("address")
-                    check = true
                     addressTextView.text = addressData
+                    check = true
+                    trueCheck()
+                    Log.d("체크 확인1", "$check")
 
                     val retrofit = Retrofit.Builder()
                         .baseUrl("https://naveropenapi.apigw.ntruss.com/")
@@ -158,6 +160,8 @@ class Third : Fragment() {
             selectOpenTime.setOnTimeChangedListener { _, hourOfDay, minute ->
                 openTime.text = "$hourOfDay" + ":" + "$minute"
                 check2 = true
+                trueCheck()
+                Log.d("체크 확인2", "$check2")
                 Log.d("결과는!", "$hourOfDay $minute")
                 Log.d("openTime 결과는!", "$openTime")
                 when (minute) {
@@ -180,8 +184,10 @@ class Third : Fragment() {
             timeCheckButton.visibility = View.VISIBLE
             selectCloseTime.visibility = View.VISIBLE
             selectCloseTime.setOnTimeChangedListener { _, hourOfDay, minute ->
-                check3 = true
                 closeTime.text = "$hourOfDay" + ":" + "$minute"
+                check3 = true
+                trueCheck()
+                Log.d("체크 확인3", "$check3")
                 Log.d("결과는!", "$hourOfDay $minute")
                 when (minute) {
                     0 -> closeTime.text = "$hourOfDay" + ":" + "00"
@@ -214,16 +220,18 @@ class Third : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if (s!!.isNotEmpty()) {
                     check4 = true
-                    if (check && check2 && check3 && check5) {
-                        joinOwnerButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
-                        joinOwnerButton.isEnabled = true
-                    }
+                    trueCheck()
                 }
             }
         })
     }
 
-
+    private fun trueCheck() = with(binding) {
+        if (check && check2 && check3 && check4 && check5) {
+            joinOwnerButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
+            joinOwnerButton.isEnabled = true
+        }
+    }
     @SuppressLint("LogNotTimber")
     private fun joinOwnerinit() = with(binding) {
         //점주로 회원가입 버튼을 누르면
@@ -247,7 +255,7 @@ class Third : Fragment() {
                 FirebaseStorage.getInstance().reference.child("images").child(email.toString())
                     .putFile(selectedImg!!)
 
-            val owner = OwnerEntity("$email", "$password", "$information","$storename", "$number", address, opentime, closetime, openday, x, y, ref.toString())
+            val owner = OwnerEntity("$email", "$password", "$storename","$information", "$number", address, opentime, closetime, openday, x, y, ref.toString())
 
             //유저 만들기 값은 (id, pw)
             auth!!.createUserWithEmailAndPassword(email.toString(), password.toString())

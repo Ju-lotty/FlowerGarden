@@ -93,12 +93,11 @@ class Home : Fragment() {
                     val opentime = i.child("opentime").value.toString()
                     val closetime = i.child("closetime").value.toString()
                     val openday = i.child("openday").value.toString()
-                    val storeNumber = i.child("number").value.toString()
                     Log.d("결과는!", "${storeName}")
 
 
                     if (storeList.isEmpty()) {
-                        adapter.setData(OwnerEntity("", "", "${storeName}", "", "${address}", "${opentime}", "${closetime}", "${openday}", "", "","")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
+                        adapter.setData(OwnerEntity("", "", "${storeName}", "","", "${address}", "${opentime}", "${closetime}", "${openday}", "", "","")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
                         }
                     } else if (storeList.isNotEmpty()) {
                         return

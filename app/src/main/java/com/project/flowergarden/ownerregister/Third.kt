@@ -233,6 +233,7 @@ class Third : Fragment() {
             //아이디 비번 점주명 주소 값 설정
             val email = arguments?.getString("Email1")
             val password = arguments?.getString("Password1")
+            val information = arguments?.getString("information")
             val storename = arguments?.getString("storename")
             val number = arguments?.getString("number")
             val address = addressTextView.text.toString()
@@ -246,20 +247,7 @@ class Third : Fragment() {
                 FirebaseStorage.getInstance().reference.child("images").child(email.toString())
                     .putFile(selectedImg!!)
 
-            val owner = OwnerEntity(
-                "$email",
-                "$password",
-                "$storename",
-                "$number",
-                address,
-                opentime,
-                closetime,
-                openday,
-                x,
-                y,
-                ref.toString()
-
-            )
+            val owner = OwnerEntity("$email", "$password", "$information","$storename", "$number", address, opentime, closetime, openday, x, y, ref.toString())
 
             //유저 만들기 값은 (id, pw)
             auth!!.createUserWithEmailAndPassword(email.toString(), password.toString())

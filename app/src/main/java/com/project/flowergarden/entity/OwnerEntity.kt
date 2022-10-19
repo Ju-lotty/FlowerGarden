@@ -6,6 +6,7 @@ data class OwnerEntity(
     val email: String,
     val password: String,
     val storename: String,
+    val information: String,
     val number: String,
     val address: String,
     val opentime: String,
@@ -16,5 +17,5 @@ data class OwnerEntity(
     val photo: String
 )
 {
-    constructor() : this("","", "","", "","" ,"","","","","")
+    constructor() : this("","", "","","", "","" ,"","","","","")
 }

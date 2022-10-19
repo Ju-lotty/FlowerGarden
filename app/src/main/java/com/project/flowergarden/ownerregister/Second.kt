@@ -23,10 +23,10 @@ class Second : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
         checkinit()
-        ObjectAnimator.ofInt(seekBar, "progress",80).start()
+        ObjectAnimator.ofInt(seekBar, "progress", 80).start()
         binding.seekBar.isEnabled = false
 
         backButton.setOnClickListener {
@@ -38,22 +38,32 @@ class Second : Fragment() {
 
     }
 
-    private fun checkinit() = with(binding){
+    private fun checkinit() = with(binding) {
         nextButton.isEnabled = false
         var check = false
         var check2 = false
-        storeNameEditTextView.addTextChangedListener(object: TextWatcher {
+        var check3 = false
+        storeNameEditTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                storeNameCheckTextView.visibility = View.VISIBLE
                 nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_regect))
                 nextButton.isEnabled = false
+                check = false
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s!!.length >= 3) {
+                    storeNameCheckTextView.visibility = View.GONE
+                } else {
+                    storeNameCheckTextView.visibility = View.VISIBLE
+                }
             }
+
             override fun afterTextChanged(s: Editable?) {
-                if(s!!.isNotEmpty()) {
+                if (s!!.isNotEmpty() && s!!.length >= 3) {
                     storeNameCheckTextView.visibility = View.GONE
                     check = true
-                    if(check2 && s.length <= 3) {
+                    if (check2 && check3) {
                         nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
                         nextButton.isEnabled = true
                     }
@@ -61,23 +71,55 @@ class Second : Fragment() {
             }
         })
         numberEditTextView.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-        numberEditTextView.addTextChangedListener(object: TextWatcher {
+        numberEditTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_regect))
                 nextButton.isEnabled = false
+                check2 = false
             }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                numberCheckTextView.visibility = View.GONE
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s!!.isNotEmpty() && s.length >= 11) {
+                    check2 = true
+                    if(check && check3) {
+                        numberCheckTextView.visibility = View.GONE
+                        nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
+                        nextButton.isEnabled = true
+                    }
+                } else {
+                    check2 = false
+                    numberCheckTextView.visibility = View.VISIBLE
+                    nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_regect))
+                    nextButton.isEnabled = false
+                }
+            }
+        })
+        informationEditTextView.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                check3 = false
+                nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_regect))
+                nextButton.isEnabled = false
+            }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
+
             override fun afterTextChanged(s: Editable?) {
-                if(s!!.isNotEmpty()) {
-                    numberCheckTextView.visibility = View.GONE
-                    check2 = true
-                    if(check && s.length <= 10) {
+                if(s!!.isEmpty()) {
+                    check3 = false
+                } else if (s!!.isNotEmpty()) {
+                    check3 = true
+                    if (check && check2) {
                         nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
                         nextButton.isEnabled = true
                     }
                 }
             }
+
         })
     }
 
@@ -91,6 +133,8 @@ class Second : Fragment() {
 
             bundle.putString("storename", storeNameEditTextView.text.toString())
             bundle.putString("number", numberEditTextView.text.toString())
+            bundle.putString("information", informationEditTextView.text.toString())
+
             bundle.putString("Email1", Email1)
             bundle.putString("Password1", Password1)
             third.arguments = bundle

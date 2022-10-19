@@ -150,6 +150,7 @@ class Third : Fragment() {
     @SuppressLint("LogNotTimber")
     private fun openTimeinit() = with(binding) {
         openTime.setOnClickListener {
+            photoAddButton.visibility = View.GONE
             timeCheckButton.visibility = View.VISIBLE
             selectOpenTime.visibility = View.VISIBLE
             selectOpenTime.setOnTimeChangedListener { _, hourOfDay, minute ->
@@ -164,6 +165,7 @@ class Third : Fragment() {
             timeCheckButton.setOnClickListener {
                 selectOpenTime.visibility = View.GONE
                 timeCheckButton.visibility = View.GONE
+                photoAddButton.visibility = View.VISIBLE
             }
         }
     }
@@ -172,6 +174,7 @@ class Third : Fragment() {
     @SuppressLint("LogNotTimber", "SetTextI18n")
     private fun closeTimeinit() = with(binding) {
         closeTime.setOnClickListener {
+            photoAddButton.visibility = View.GONE
             timeCheckButton.visibility = View.VISIBLE
             selectCloseTime.visibility = View.VISIBLE
             selectCloseTime.setOnTimeChangedListener { _, hourOfDay, minute ->
@@ -185,6 +188,7 @@ class Third : Fragment() {
             timeCheckButton.setOnClickListener {
                 selectCloseTime.visibility = View.GONE
                 timeCheckButton.visibility = View.GONE
+                photoAddButton.visibility = View.VISIBLE
                 if (openTime.text.isNotEmpty()) {
                     timeCheckTextView.visibility = View.GONE
                 }

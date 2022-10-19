@@ -67,12 +67,13 @@ class MainActivityOwner : AppCompatActivity() {
                     val closetime = snapshot.child("closetime").value.toString()
                     val storeNumber = snapshot.child("number").value.toString()
                     val openday = snapshot.child("openday").value.toString()
-
+                    val information = snapshot.child("information").value.toString()
                     binding.nickNameTextView.text = nickname
                     binding.addressTextView.text = address
                     binding.timeTextView.text = opentime + "~" + closetime
                     binding.numberTextView.text = storeNumber
                     binding.openDayTextView.text = openday
+                    binding.informationTextView.text = information
                 }
 
                 override fun onCancelled(error: DatabaseError) {

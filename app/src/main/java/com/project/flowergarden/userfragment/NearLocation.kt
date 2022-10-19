@@ -97,6 +97,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                     val storeNumber = i.child("number").value
                     val openday = i.child("openday").value
                     val address = i.child("address").value
+                    val information = i.child("information").value
 
                     Log.d("y_Result 값은", "${y_Result}")
                     Log.d("x_Reuslt 값은", "${x_Reuslt}")
@@ -131,6 +132,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                                 intent.putExtra("openday", "${openday}")
                                 intent.putExtra("address", "${address}")
                                 intent.putExtra("email", "${email}")
+                                intent.putExtra("information", "${information}")
                             }
                             startActivity(intent)
                         }

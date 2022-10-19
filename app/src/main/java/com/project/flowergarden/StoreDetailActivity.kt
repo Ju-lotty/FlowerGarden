@@ -32,6 +32,7 @@ class StoreDetailActivity : AppCompatActivity() {
         timeTextView.text = secondIntent.getStringExtra("opentime") + "~" + secondIntent.getStringExtra("closetime")
         numberTextView.text = secondIntent.getStringExtra("storeNumber")
         openDayTextView.text = secondIntent.getStringExtra("openday")
+        detailInformationTextView.text = secondIntent.getStringExtra("information")
         val email = secondIntent.getStringExtra("email")
         Log.d("Store 결과", "$email")
 

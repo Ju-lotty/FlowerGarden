@@ -110,12 +110,10 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                     card_view.visibility = View.GONE
 
                     naverMap.setOnMapClickListener { _, _ ->
-                        marker.icon = OverlayImage.fromResource(R.drawable.ic_marker)
                         hideMenu()
                     }
 
                     marker.setOnClickListener { overlay ->
-                        marker.icon = OverlayImage.fromResource(R.drawable.ic_clickedmarker)
                         showMenu()
                         card_view.storeName.text = storeName.toString()
                         card_view.openTime.text = opentime.toString()

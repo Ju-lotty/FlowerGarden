@@ -236,19 +236,7 @@ class Third : Fragment() {
             val x = x_Result.text.toString()
             val y = y_Result.text.toString()
 
-
-//                var storage : FirebaseStorage? = FirebaseStorage.getInstance() //firebasestorage인스턴스생성
-//                //파일 이름 생성.
-//                var fileName = "IMAGE_${SimpleDateFormat("yyyymmdd_HHmmss").format(Date())}_.png"
-//
-//                var imagesRef = storage!!.reference.child("images/").child(fileName)    //기본 참조 위치/images/${fileName}
-//                imagesRef.putFile(selectedImg!!)
-
-
-
-            val ref = FirebaseStorage.getInstance().reference.child("images").child(auth!!.currentUser?.email.toString()).putFile(selectedImg!!)
-
-
+            val ref = FirebaseStorage.getInstance().reference.child("images").child(email.toString()).putFile(selectedImg!!)
 
             val owner = OwnerEntity("$email", "$password", "$storename", "$number", address, opentime, closetime, openday, x, y, ref.toString())
 

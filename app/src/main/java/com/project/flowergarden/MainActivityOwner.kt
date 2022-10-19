@@ -2,9 +2,11 @@ package com.project.flowergarden
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +21,8 @@ import com.google.firebase.storage.ktx.storage
 import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import com.project.flowergarden.databinding.ActivityMainOwnerBinding
 import kotlinx.android.synthetic.main.activity_main_owner.*
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 
 
 class MainActivityOwner : AppCompatActivity() {
@@ -43,12 +47,13 @@ class MainActivityOwner : AppCompatActivity() {
         OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
         userID = user!!.uid
 
-
         val storage = FirebaseStorage.getInstance()
         val storageReference = storage.reference
         val pathReference = storageReference.child("images/").child(auth!!.currentUser?.email.toString())
             pathReference.downloadUrl.addOnSuccessListener {
                 storeImage.setImageURI(it)
+                Glide.with(this).load(it).into(storeImage) // GlideApp 사용
+                progressBar.visibility = View.GONE
             }
 
 

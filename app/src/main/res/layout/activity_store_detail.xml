@@ -43,13 +43,11 @@
         app:layout_constraintTop_toBottomOf="@id/nickNameTextView"
         tools:text="서울특별시 노원구 초안산로 2" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/storeImageButton"
+    <ImageView
+        android:id="@+id/storeImage"
         android:layout_width="0dp"
         android:layout_height="210dp"
-        android:layout_marginHorizontal="20dp"
         android:background="@drawable/owner_img_shape"
-        android:src="@drawable/ic_not"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +150,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/storeImageButton" />
+        app:layout_constraintTop_toBottomOf="@id/storeImage" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -166,7 +164,7 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/storeImageButton" />
+            app:layout_constraintTop_toBottomOf="@id/storeImage" />
 
 
 

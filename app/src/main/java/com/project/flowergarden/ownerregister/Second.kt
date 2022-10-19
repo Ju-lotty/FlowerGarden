@@ -26,7 +26,6 @@ class Second : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
         checkinit()
-
         ObjectAnimator.ofInt(seekBar, "progress",80).start()
         binding.seekBar.isEnabled = false
 

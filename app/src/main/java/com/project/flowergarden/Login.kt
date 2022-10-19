@@ -63,6 +63,7 @@ class Login : AppCompatActivity() {
                             }else{
                                 Toast.makeText(this@Login, "로그인을 성공하였습니다.", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@Login, MainActivityOwner::class.java)
+                                progressBar.visibility = View.GONE
                                 startActivity(intent)
                             }
                         }
@@ -70,6 +71,10 @@ class Login : AppCompatActivity() {
                         override fun onCancelled(error: DatabaseError) {
                         }
                     })
+                } else {
+                    Toast.makeText(this@Login, "회원정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    progressBar.visibility = View.GONE
+                    return@addOnCompleteListener
                 }
             }
         }

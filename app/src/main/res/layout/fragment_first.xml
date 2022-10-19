@@ -46,102 +46,112 @@
         app:layout_constraintStart_toEndOf="@id/backButton"
         app:layout_constraintTop_toTopOf="@id/backButton" />
 
-    <TextView
-        android:id="@+id/value_Email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="이메일 입력"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/backButton"
-        app:layout_constraintTop_toBottomOf="@id/backButton" />
 
-    <EditText
-        android:id="@+id/emailEditTextView"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailContainer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:hint="이메일을 입력해주세요."
-        android:inputType="textEmailAddress"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/value_Email"
-        app:layout_constraintTop_toBottomOf="@id/value_Email" />
-
-    <TextView
-        android:id="@+id/emailCheckTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이메일 형식이 올바르지 않습니다."
-        android:textColor="#FF0000"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/value_Email"
-        app:layout_constraintTop_toBottomOf="@id/emailEditTextView" />
-
-
-    <TextView
-        android:id="@+id/value_Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="비밀번호 입력"
-        android:textColor="@color/black"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp"
+        android:enabled="true"
         app:layout_constraintStart_toStartOf="@id/backButton"
-        app:layout_constraintTop_toBottomOf="@id/emailEditTextView" />
+        app:layout_constraintTop_toBottomOf="@id/backButton">
 
-    <EditText
-        android:id="@+id/passwordEditTextView"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/emailCheckTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="이메일 형식이 올바르지 않습니다."
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/emailEditTextView"
+            app:layout_constraintTop_toBottomOf="@id/emailEditTextView" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordContainer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:hint="8글자 이상 입력해주세요."
-        android:inputType="textPassword"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/value_Password"
-        app:layout_constraintTop_toBottomOf="@id/value_Password" />
-
-    <TextView
-        android:id="@+id/lengthCheckTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8글자이상 입력해야합니다."
-        android:textColor="#FF0000"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/passwordEditTextView"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditTextView" />
-
-    <TextView
-        android:id="@+id/value_PasswordCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="40dp"
-        android:text="비밀번호 확인"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/backButton"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditTextView" />
+        android:enabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
+        app:layout_constraintEnd_toEndOf="@id/emailContainer"
+        app:layout_constraintStart_toStartOf="@id/emailContainer"
+        app:layout_constraintTop_toBottomOf="@id/emailContainer"
+        app:passwordToggleEnabled="true">
 
-    <EditText
-        android:id="@+id/passwordCheckEditTextView"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Passwrod"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/lengthCheckTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8글자이상 입력해야합니다."
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/passwordContainer"
+            app:layout_constraintTop_toBottomOf="@id/passwordContainer" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordCheckContainer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:hint="입력한 비밀번호을 입력해주세요."
-        android:inputType="textPassword"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/value_PasswordCheck"
-        app:layout_constraintTop_toBottomOf="@id/value_PasswordCheck" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:enabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
+        app:layout_constraintEnd_toEndOf="@id/passwordContainer"
+        app:layout_constraintStart_toStartOf="@id/passwordContainer"
+        app:layout_constraintTop_toBottomOf="@id/passwordContainer"
+        app:passwordToggleEnabled="true">
 
-    <TextView
-        android:id="@+id/resultCheckTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호가 일치하지 않습니다."
-        android:textColor="#FF0000"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/passwordCheckEditTextView"
-        app:layout_constraintTop_toBottomOf="@id/passwordCheckEditTextView" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordCheckEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Passwrod Check"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/resultCheckTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호가 일치하지 않습니다."
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/passwordCheckEditTextView"
+            app:layout_constraintTop_toBottomOf="@id/passwordCheckEditTextView" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/nextButton"

@@ -90,6 +90,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                     val latlong = "${y} ${x}".split(" ").toTypedArray()
                     val y_Result = latlong[0].toDouble()
                     val x_Reuslt = latlong[1].toDouble()
+                    val email = i.child("email").value
                     val storeName = i.child("storename").value
                     val opentime = i.child("opentime").value
                     val closetime = i.child("closetime").value
@@ -129,6 +130,7 @@ class NearLocation : Fragment(), OnMapReadyCallback {
                                 intent.putExtra("storeNumber", "${storeNumber}")
                                 intent.putExtra("openday", "${openday}")
                                 intent.putExtra("address", "${address}")
+                                intent.putExtra("email", "${email}")
                             }
                             startActivity(intent)
                         }

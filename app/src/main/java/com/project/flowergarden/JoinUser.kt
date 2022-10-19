@@ -25,7 +25,7 @@ class JoinUser : AppCompatActivity() {
     var check = false
     var check2 = false
     var check3 = false
-    var check4 = true
+    var check4 = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,6 +130,19 @@ class JoinUser : AppCompatActivity() {
                     resultCheckTextView.visibility = View.VISIBLE
                     joinUserButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_regect))
                     joinUserButton.isEnabled = false
+                }
+            }
+        })
+        nickNAmeEditTextView.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                joinUserButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_regect))
+                joinUserButton.isEnabled = false
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+            override fun afterTextChanged(s: Editable?) {
+                if(s!!.isNotEmpty()) {
+                    check4 = true
                 }
             }
         })

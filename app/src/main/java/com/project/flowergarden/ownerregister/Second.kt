@@ -53,7 +53,7 @@ class Second : Fragment() {
                 if(s!!.isNotEmpty()) {
                     storeNameCheckTextView.visibility = View.GONE
                     check = true
-                    if(check2) {
+                    if(check2 && s.length <= 3) {
                         nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
                         nextButton.isEnabled = true
                     }
@@ -72,7 +72,7 @@ class Second : Fragment() {
                 if(s!!.isNotEmpty()) {
                     numberCheckTextView.visibility = View.GONE
                     check2 = true
-                    if(check) {
+                    if(check && s.length <= 10) {
                         nextButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
                         nextButton.isEnabled = true
                     }

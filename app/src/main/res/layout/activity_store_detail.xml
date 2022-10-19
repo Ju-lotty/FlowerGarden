@@ -42,12 +42,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nickNameTextView"
         tools:text="서울특별시 노원구 초안산로 2" />
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp"
+        app:layout_constraintTop_toBottomOf="@id/addressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <ImageView
-        android:id="@+id/storeImage"
+        android:id="@+id/detailStoreImage"
         android:layout_width="0dp"
         android:layout_height="210dp"
-        android:background="@drawable/owner_img_shape"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +120,7 @@
         <TextView
             android:id="@+id/numberTextView"
             android:fontFamily="@font/font"
-            android:textColor="@color/black"
+            android:textColor="#0042FF"
             android:layout_marginStart="70dp"
             android:layout_gravity="center|start"
             android:layout_marginTop="110dp"

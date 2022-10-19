@@ -13,9 +13,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+        <ProgressBar
+            android:id="@+id/progressBar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
-            android:id="@+id/iv_profile"
+            android:id="@+id/storeImageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/ic_app"
@@ -31,8 +37,8 @@
             android:text="동호네 꽃집"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_profile"
-            app:layout_constraintTop_toTopOf="@id/iv_profile" />
+            app:layout_constraintStart_toEndOf="@id/storeImageView"
+            app:layout_constraintTop_toTopOf="@id/storeImageView" />
 
         <TextView
             android:id="@+id/openTime"
@@ -43,7 +49,7 @@
             android:textColor="#101C68"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/storeName"
-            app:layout_constraintTop_toTopOf="@id/iv_profile" />
+            app:layout_constraintTop_toTopOf="@id/storeImageView" />
 
         <TextView
             android:id="@+id/notting"
@@ -54,7 +60,7 @@
             android:textColor="#101C68"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/openTime"
-            app:layout_constraintTop_toTopOf="@id/iv_profile" />
+            app:layout_constraintTop_toTopOf="@id/storeImageView" />
         <TextView
             android:id="@+id/closeTime"
             android:layout_width="wrap_content"
@@ -64,7 +70,7 @@
             android:textColor="#101C68"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/notting"
-            app:layout_constraintTop_toTopOf="@id/iv_profile" />
+            app:layout_constraintTop_toTopOf="@id/storeImageView" />
 
         <TextView
             android:id="@+id/address"
@@ -74,8 +80,8 @@
             android:text="서울시 노원구 초안산로 12"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/iv_profile"
-            app:layout_constraintStart_toEndOf="@id/iv_profile"
+            app:layout_constraintBottom_toBottomOf="@id/storeImageView"
+            app:layout_constraintStart_toEndOf="@id/storeImageView"
             app:layout_constraintTop_toBottomOf="@id/storeName" />
 
         <TextView

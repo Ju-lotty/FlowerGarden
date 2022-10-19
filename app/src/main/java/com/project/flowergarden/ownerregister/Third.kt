@@ -45,6 +45,7 @@ class Third : Fragment() {
     var check2 = false
     var check3 = false
     var check4 = false
+    var check5 = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,6 +100,7 @@ class Third : Fragment() {
             storePhoto.setImageURI(selectedImg)
             val a = selectedImg.toString()
             Log.d("셀렉티드이미지 결과 값 :", "$a")
+            check5 = true
         }
 
         when (requestCode) {
@@ -212,7 +214,7 @@ class Third : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if (s!!.isNotEmpty()) {
                     check4 = true
-                    if (check && check2 && check3) {
+                    if (check && check2 && check3 && check5) {
                         joinOwnerButton.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_register))
                         joinOwnerButton.isEnabled = true
                     }
@@ -240,9 +242,24 @@ class Third : Fragment() {
             val x = x_Result.text.toString()
             val y = y_Result.text.toString()
 
-            val ref = FirebaseStorage.getInstance().reference.child("images").child(email.toString()).putFile(selectedImg!!)
+            val ref =
+                FirebaseStorage.getInstance().reference.child("images").child(email.toString())
+                    .putFile(selectedImg!!)
 
-            val owner = OwnerEntity("$email", "$password", "$storename", "$number", address, opentime, closetime, openday, x, y, ref.toString())
+            val owner = OwnerEntity(
+                "$email",
+                "$password",
+                "$storename",
+                "$number",
+                address,
+                opentime,
+                closetime,
+                openday,
+                x,
+                y,
+                ref.toString()
+
+            )
 
             //유저 만들기 값은 (id, pw)
             auth!!.createUserWithEmailAndPassword(email.toString(), password.toString())

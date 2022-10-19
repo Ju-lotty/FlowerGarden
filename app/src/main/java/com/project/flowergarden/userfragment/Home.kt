@@ -10,13 +10,17 @@ import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import com.project.flowergarden.StoreDetailActivity
 import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
+import kotlinx.android.synthetic.main.activity_main_owner.*
+import kotlinx.android.synthetic.main.item_store.*
 
 
 class Home : Fragment() {
@@ -92,18 +96,9 @@ class Home : Fragment() {
                     val storeNumber = i.child("number").value.toString()
                     Log.d("결과는!", "${storeName}")
 
+
                     if (storeList.isEmpty()) {
                         adapter.setData(OwnerEntity("", "", "${storeName}", "", "${address}", "${opentime}", "${closetime}", "${openday}", "", "","")) {                            val intent = Intent(context, StoreDetailActivity::class.java)
-                            /*intent.apply {
-                                intent.putExtra("storeName", "${storeName}")
-                                intent.putExtra("opentime", "${opentime}")
-                                intent.putExtra("closetime", "${closetime}")
-                                intent.putExtra("storeNumber", "${storeNumber}")
-                                intent.putExtra("openday", "${openday}")
-                                intent.putExtra("address", "${address}")
-                            }
-                            Toast.makeText(context, "액티비티 이동!", Toast.LENGTH_SHORT).show()
-                            startActivity(intent)*/
                         }
                     } else if (storeList.isNotEmpty()) {
                         return

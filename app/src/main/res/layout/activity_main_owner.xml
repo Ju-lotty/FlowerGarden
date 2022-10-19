@@ -132,7 +132,7 @@
         <TextView
             android:id="@+id/numberTextView"
             android:fontFamily="@font/font"
-            android:textColor="@color/black"
+            android:textColor="#0042FF"
             android:layout_marginStart="70dp"
             android:layout_gravity="center|start"
             android:layout_marginTop="110dp"

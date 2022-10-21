@@ -3,8 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <View
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#D6D6D6"
 
-
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,20 +20,22 @@
         <ProgressBar
             android:id="@+id/progressBar"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/storeImageView"
+            app:layout_constraintEnd_toEndOf="@id/storeImageView"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/storeImageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:src="@drawable/ic_app"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:layout_marginTop="20dp"
             android:id="@+id/storeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,6 +43,7 @@
             android:text="동호네 꽃집"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/storeImageView"
             app:layout_constraintTop_toTopOf="@id/storeImageView" />
 
@@ -44,33 +51,33 @@
             android:id="@+id/openTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:text="09:00"
-            android:textColor="#101C68"
+            android:textColor="#4B5DD1"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/storeName"
-            app:layout_constraintTop_toTopOf="@id/storeImageView" />
+            app:layout_constraintBottom_toBottomOf="@id/storeName"/>
 
         <TextView
             android:id="@+id/notting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="2dp"
             android:text="~"
-            android:textColor="#101C68"
+            android:textColor="#4B5DD1"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/openTime"
-            app:layout_constraintTop_toTopOf="@id/storeImageView" />
+            app:layout_constraintBottom_toBottomOf="@id/storeName"/>
         <TextView
             android:id="@+id/closeTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="2dp"
             android:text="20:00"
-            android:textColor="#101C68"
+            android:textColor="#4B5DD1"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/notting"
-            app:layout_constraintTop_toTopOf="@id/storeImageView" />
+            app:layout_constraintBottom_toBottomOf="@id/storeName"/>
 
         <TextView
             android:id="@+id/address"
@@ -79,8 +86,9 @@
             android:layout_marginStart="8dp"
             android:text="서울시 노원구 초안산로 12"
             android:textColor="@color/black"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/storeImageView"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toEndOf="@id/storeImageView"
             app:layout_constraintTop_toBottomOf="@id/storeName" />
 
@@ -90,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="운영요일 : "
+            android:textSize="12sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/address"
@@ -100,11 +109,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="월 화 수 목 금 "
+            android:textSize="12sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/open"
             app:layout_constraintTop_toBottomOf="@id/address" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,7 +32,7 @@ class StoreDetailActivity : AppCompatActivity() {
         timeTextView.text = secondIntent.getStringExtra("opentime") + "~" + secondIntent.getStringExtra("closetime")
         numberTextView.text = secondIntent.getStringExtra("storeNumber")
         openDayTextView.text = secondIntent.getStringExtra("openday")
-        detailInformationTextView.text = secondIntent.getStringExtra("information")
+        informationTextView.text = secondIntent.getStringExtra("information")
         val email = secondIntent.getStringExtra("email")
         Log.d("Store 결과", "$email")
 
@@ -43,7 +43,7 @@ class StoreDetailActivity : AppCompatActivity() {
         val pathReference = storageReference.child("images/").child(email.toString())
         pathReference.downloadUrl.addOnSuccessListener {
             Log.d("Store it 결과", "$it")
-            Glide.with(this).load(it).into(detailStoreImage)
+            Glide.with(this).load(it).into(storeImage)
             progressBar.visibility = View.GONE
         }
         val number = numberTextView.text.toString()

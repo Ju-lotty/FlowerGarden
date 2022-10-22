@@ -68,7 +68,9 @@
         <activity
             android:name=".MainActivityUser"
             android:exported="false" />
-
+        <activity android:name=".custom_dialog"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="r6ybv8etcx" />

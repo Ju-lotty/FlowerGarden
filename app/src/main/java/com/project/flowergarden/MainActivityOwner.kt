@@ -47,41 +47,45 @@ class MainActivityOwner : AppCompatActivity() {
         OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
         userID = user!!.uid
 
+        val dialog = custom_dialog(this)
+        dialog.show()
+
         val storage = FirebaseStorage.getInstance()
         val storageReference = storage.reference
-        val pathReference = storageReference.child("images/").child(auth!!.currentUser?.email.toString())
-            pathReference.downloadUrl.addOnSuccessListener {
-                storeImage.setImageURI(it)
-                Glide.with(this).load(it).into(storeImage) // GlideApp 사용
-                progressBar.visibility = View.GONE
+        val pathReference =
+            storageReference.child("images/").child(auth!!.currentUser?.email.toString())
+        pathReference.downloadUrl.addOnSuccessListener {
+            storeImage.setImageURI(it)
+            Glide.with(this).load(it).into(storeImage) // GlideApp 사용
+            progressBar.visibility = View.GONE
+        }
+
+
+        OwnerDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
+
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val nickname = snapshot.child("storename").value.toString()
+                val address = snapshot.child("address").value.toString()
+                val opentime = snapshot.child("opentime").value.toString()
+                val closetime = snapshot.child("closetime").value.toString()
+                val storeNumber = snapshot.child("number").value.toString()
+                val openday = snapshot.child("openday").value.toString()
+                val information = snapshot.child("information").value.toString()
+                binding.nickNameTextView.text = nickname
+                binding.addressTextView.text = address
+                binding.timeTextView.text = opentime + "~" + closetime
+                binding.numberTextView.text = storeNumber
+                binding.openDayTextView.text = openday
+                binding.informationTextView.text = information
             }
 
-
-            OwnerDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
-
-                @SuppressLint("SetTextI18n")
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val nickname = snapshot.child("storename").value.toString()
-                    val address = snapshot.child("address").value.toString()
-                    val opentime = snapshot.child("opentime").value.toString()
-                    val closetime = snapshot.child("closetime").value.toString()
-                    val storeNumber = snapshot.child("number").value.toString()
-                    val openday = snapshot.child("openday").value.toString()
-                    val information = snapshot.child("information").value.toString()
-                    binding.nickNameTextView.text = nickname
-                    binding.addressTextView.text = address
-                    binding.timeTextView.text = opentime + "~" + closetime
-                    binding.numberTextView.text = storeNumber
-                    binding.openDayTextView.text = openday
-                    binding.informationTextView.text = information
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
-        }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
     }
+}
 
 
 

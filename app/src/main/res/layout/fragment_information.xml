@@ -39,65 +39,16 @@
         app:layout_constraintStart_toEndOf="@id/profileImageView"
         app:layout_constraintTop_toTopOf="@id/profileImageView"/>
 
-    <View
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="2.5dp"
-        android:layout_marginBottom="250dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:textSize="20sp"
-        android:id="@+id/setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/font"
-        android:text="서비스"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line1" />
-
-    <ImageView
-        android:id="@+id/heartImageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_heart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setting" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:fontFamily="@font/font"
-        android:id="@+id/likeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:background="#FFFFFFFF"
-        android:text="좋아요 목록"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting" />
 
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="2.5dp"
         android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/profileImageView"/>
 
     <TextView
         android:layout_marginTop="10dp"

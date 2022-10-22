@@ -10,17 +10,14 @@ import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
 import com.project.flowergarden.StoreDetailActivity
+import com.project.flowergarden.custom_dialog
 import com.project.flowergarden.databinding.FragmentHomeBinding
 import com.project.flowergarden.entity.OwnerEntity
 import com.project.flowergarden.entity.StoreAdapter
-import kotlinx.android.synthetic.main.activity_main_owner.*
-import kotlinx.android.synthetic.main.item_store.*
 
 
 class Home : Fragment() {
@@ -38,7 +35,7 @@ class Home : Fragment() {
     private var userID: String? = null
     private var ownerID: String? = null
 
-
+    var check: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +60,17 @@ class Home : Fragment() {
         getUserName()
         viewFlipper()
         ownerList()
+        showDialog()
     }
+
+    private fun showDialog() {
+        if(check == false) {
+            val dialog = custom_dialog(requireContext())
+            dialog.show()
+        }
+        check = true
+    }
+
     private fun getUserName() {
         UserDB.child(userID!!).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -45,7 +45,6 @@ class Information : Fragment() {
         logoutButtonClicked()
         secessionButtonClicked()
         showUserNickname()
-        likeButtoninit()
     }
 
 
@@ -66,13 +65,13 @@ class Information : Fragment() {
         })
     }
 
-    private fun likeButtoninit() {
-        likeButton.setOnClickListener {
-            val like = Like()
-            activity?.supportFragmentManager!!.beginTransaction().replace(R.id.container, like)
-                .commit()
-        }
-    }
+//    private fun likeButtoninit() {
+//        likeButton.setOnClickListener {
+//            val like = Like()
+//            activity?.supportFragmentManager!!.beginTransaction().replace(R.id.container, like)
+//                .commit()
+//        }
+//    }
 
     private fun logoutButtonClicked() {
         logoutButton.setOnClickListener {

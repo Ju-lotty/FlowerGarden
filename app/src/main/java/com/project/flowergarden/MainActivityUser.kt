@@ -20,7 +20,6 @@ class MainActivityUser : AppCompatActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         val home1 = Home()
         val home2 = NearLocation()
-        val home3 = Like()
         val home4 = Information()
         showFragment(home1)
 
@@ -29,7 +28,6 @@ class MainActivityUser : AppCompatActivity() {
                 when(it.itemId){
                     R.id.ic_home -> showFragment(home1)
                     R.id.ic_map ->  showFragment(home2)
-                    R.id.ic_like-> showFragment(home3)
                     R.id.ic_information -> showFragment(home4)
                     else -> true
                 }

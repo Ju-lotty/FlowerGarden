@@ -1,0 +1,34 @@
+# FlowerGarden
+
+# 개요
+
+카카오맵, 네이버 지도 등 가게(옷, 식당, 백화점)에 대한 정보가 무수한 방면
+
+꽃집에 대한 정보(전화번호, 운영시간)는 부족하여 직접 가봐야 하는 불편함이 있습니다.
+
+이러한 불편을 제거하기 위해 소비자와, 점주가 서로 소통할 수 있는 앱을 만들게 되었습니다.
+
+# Splash화면
+<p align="left">
+<img src="https://user-images.githubusercontent.com/101933903/199677690-3de6b129-6f79-4b69-a825-76452e4fb71d.gif"/>
+</p>
+
+# 회원가입 화면
+
+<p algin="left">
+<img src="https://user-images.githubusercontent.com/101933903/199708809-445d57f6-4de9-46c6-88c5-178eabb6439b.gif"/>
+<img src="https://user-images.githubusercontent.com/101933903/199678410-c8478a91-a0a9-4295-8e06-4bea9e008429.gif"/>
+</p>
+
+
+# 로그인 화면
+
+<p algin="left">
+<img src="https://user-images.githubusercontent.com/101933903/199706873-f6366806-6d92-49f0-ae46-cc1ce04c1d80.gif"/>
+</p>
+
+# 메인 화면
+
+<p algin="left">
+<img src="https://user-images.githubusercontent.com/101933903/199709507-322eb75c-8c5b-46b2-8d6d-bcb3c9f79a5e.gif"/>
+</p>

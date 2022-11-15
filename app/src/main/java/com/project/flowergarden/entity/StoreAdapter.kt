@@ -15,9 +15,26 @@ import kotlinx.android.synthetic.main.activity_main_owner.*
 
 class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
 
-    private lateinit var OwnerDB: DatabaseReference
-    val storeList = mutableListOf<OwnerEntity>()
+    private val OwnerDB: DatabaseReference =
+        FirebaseDatabase.getInstance().getReference("Owner").apply {
+            addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEachIndexed { index, i ->
+                        val email = i.child("email").value.toString()
+                        emailList.add(email)
+                    }
+                }
 
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+        }
+    private val emailList = mutableListOf<String>()
+    val storeList = mutableListOf<OwnerEntity>()
+    private val storage = FirebaseStorage.getInstance()
+    private val storageReference = storage.reference
     lateinit var itemClickListener: (OwnerEntity) -> Unit
 
     inner class ViewHolder(
@@ -25,40 +42,23 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
         private val listener: (OwnerEntity) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(ownerEntity: OwnerEntity) = with(binding) {
+        fun bind(ownerEntity: OwnerEntity, index: Int) = with(binding) {
             storeName.text = ownerEntity.storename
             address.text = ownerEntity.address
             openTime.text = ownerEntity.opentime
             closeTime.text = ownerEntity.closetime
             openDay.text = ownerEntity.openday
-
-            OwnerDB = FirebaseDatabase.getInstance().getReference("Owner")
-            OwnerDB.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (i in snapshot.children) {
-                        val email = i.child("email").value
-                        Log.d("이메일 결과", "$email")
-                        val storage = FirebaseStorage.getInstance()
-                        val storageReference = storage.reference
-                        val pathReference = storageReference.child("images/").child(email.toString())
-                        pathReference.downloadUrl.addOnSuccessListener {
-                            storeImageView.setImageURI(it)
-                            progressBar.visibility = View.GONE
-                            Glide.with(context).load(it).into(storeImageView) // GlideApp 사용
-                            if (storeImageView.isVisible) {
-                                progressBar.visibility = View.GONE
-                                false
-                            }
-                        }
-                    }
+            val email = emailList[index]
+            val pathReference = storageReference.child("images/").child(email)
+            pathReference.downloadUrl.addOnSuccessListener {
+                storeImageView.setImageURI(it)
+                progressBar.visibility = View.GONE
+                Glide.with(context).load(it).into(storeImageView) // GlideApp 사용
+                if (storeImageView.isVisible) {
+                    progressBar.visibility = View.GONE
+                    false
                 }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
+            }
             root.setOnClickListener {
                 listener(ownerEntity)
             }
@@ -71,14 +71,14 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: StoreAdapter.ViewHolder, position: Int) {
-        holder.bind(storeList[position])
+        holder.bind(storeList[position], position)
     }
 
     override fun getItemCount(): Int = storeList.size
 
-    fun setData(ownerEntity: OwnerEntity,listener: (OwnerEntity) -> Unit) {
+    fun setData(ownerEntity: OwnerEntity, listener: (OwnerEntity) -> Unit) {
         storeList.add(ownerEntity)
-        itemClickListener  = listener
+        itemClickListener = listener
         notifyDataSetChanged()
     }
 }

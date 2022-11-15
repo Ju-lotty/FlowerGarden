@@ -17,20 +17,13 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_app"
         android:label="꽃밭"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.FlowerGarden"
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText"
         tools:replace="android:appComponentFactory"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity2213"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <activity
             android:name=".Splash"
             android:exported="true">

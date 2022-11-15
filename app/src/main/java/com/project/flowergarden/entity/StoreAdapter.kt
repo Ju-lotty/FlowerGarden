@@ -40,8 +40,7 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
                         Log.d("이메일 결과", "$email")
                         val storage = FirebaseStorage.getInstance()
                         val storageReference = storage.reference
-                        val pathReference =
-                            storageReference.child("images/").child(email.toString())
+                        val pathReference = storageReference.child("images/").child(email.toString())
                         pathReference.downloadUrl.addOnSuccessListener {
                             storeImageView.setImageURI(it)
                             progressBar.visibility = View.GONE
@@ -59,8 +58,6 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
                 }
 
             })
-
-
 
             root.setOnClickListener {
                 listener(ownerEntity)
